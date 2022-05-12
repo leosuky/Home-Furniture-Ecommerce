@@ -3,6 +3,8 @@ import { AppBar, Toolbar,
   Tabs, Tab, 
   Box, IconButton, 
   useMediaQuery, SwipeableDrawer,
+  List, ListItemButton, ListItemText,
+  ListItemIcon, Divider,
 } from '@mui/material'
 import { Link } from 'react-router-dom';
 
@@ -16,40 +18,55 @@ import AccountCircleOutlined from '@mui/icons-material/AccountCircleOutlined';
 import ShoppingCartOutlined from '@mui/icons-material/ShoppingCartOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import ShopIcon from '@mui/icons-material/Shop';
+import HomeIcon from '@mui/icons-material/Home';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
+import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+import InfoIcon from '@mui/icons-material/Info';
+
+
+// Navigation Options
+const navOptions = [
+  {id:0, path:'/', label:'HOME', icon: <HomeIcon/>},
+  {id:1, path:'/shop', label:'SHOP', icon: <ShopIcon/>},
+  {id:2, path:'/blog', label:'BLOG', icon: <NewspaperIcon/>},
+  {id:3, path:'/contactus', label:'CONTACT', icon: <PermContactCalendarIcon/>},
+  {id:4, path:'/aboutus', label:'ABOUT US', icon: <InfoIcon/>},
+]
 
 
 
 function Navbar() {
   // states
-  const [tab, setTab] = useState(parseInt(localStorage.getItem('tab')) || 0);
+  const [tab, setTab] = useState(parseInt(sessionStorage.getItem('tab')) || 0);
   const [openDrawer, setOpenDrawer] = useState(false)
   const theme = useTheme();
   const screenMD = useMediaQuery(theme.breakpoints.down('1100'))
 
+  // for iOS swipeable drawer
+  const iOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent)
+
+  // side effects
   useEffect(() => {
-    localStorage.setItem('tab', JSON.stringify(tab));
+    sessionStorage.setItem('tab', JSON.stringify(tab));
   }, [tab]);
 
-  // useEffect(() => {
-  //   const items = JSON.parse(localStorage.getItem('tab'));
-  //   if (items) {
-  //     setTab(items);
-  //   }
-  // }, []);
 
-  // Custom Styles
+  // Custom Styles _______________________________________________________________________
   const iconBtn = {
     '&:hover':{
       color: theme.palette.secondary.main
     },
   }
 
-  // Callback Handlers
+
+  // Callback Handlers_____________________________________________________________________
   const handleTabs = (e, value) => {
     setTab(value)
   }
+  
 
-  // Smaller Components
+  // Smaller Components____________________________________________________________________
   const tabs = (
     <React.Fragment>
       <Tabs 
@@ -104,10 +121,38 @@ function Navbar() {
         open={openDrawer}
         onOpen={() => setOpenDrawer(true)}
         onClose={() => setOpenDrawer(false)}
+        disableBackdropTransition={!iOS}
+        disableDiscovery={iOS}
       >
-        <div style={{marginTop: '90px'}}>
-          <h1>Hello</h1>
-        </div>
+        <Box sx={{marginBottom: '5.5em'}}/>
+        <Box sx={{minWidth: '150px'}}>
+          <List>
+            
+            <Divider/>
+            { navOptions.map((item) => (
+              <ListItemButton 
+                key={item.id}
+                component={Link} to={item.path}
+                divider alignItems='center'
+                onClick={() => {setOpenDrawer(false); setTab(item.id)}}
+                selected={tab === item.id}
+                sx={{
+                  backgroundColor: tab === item.id ? `${theme.palette.secondary.main} !important`:'inherit',
+                  color: tab === item.id ? `${theme.palette.primary.main} !important`:'inherit'
+                }}
+              >
+                <ListItemIcon sx={{
+                  minWidth:'35px', ml: '1em', 
+                  color:tab === item.id?'white':'inherit'
+                }}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.label}/>
+              </ListItemButton>
+            ))}
+
+          </List>
+        </Box>
       </SwipeableDrawer>
     </React.Fragment>
   )
