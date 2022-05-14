@@ -3,6 +3,7 @@ import GlobalTheme from './ui/Theme';
 import { Route, Routes } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import './App.css';
 
 // Pages
@@ -20,6 +21,7 @@ function App() {
           <Route path='/contactus' element={<ContactUsPage/>} />
           <Route path='/aboutus' element={<AboutUsPage/>} />
         </Routes>
+        <Footer/>
       </ThemeProvider>
     </div>
   );
