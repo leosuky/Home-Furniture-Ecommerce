@@ -4,7 +4,8 @@ import {
     Box, Container,
     Grid, Typography,
     IconButton,
-    Paper, InputBase
+    Paper, InputBase,
+    useMediaQuery,
 } from '@mui/material'
 
 import { useTheme } from '@mui/material/styles';
@@ -16,11 +17,15 @@ import {
     RiInstagramFill, RiTwitterFill, 
     RiSendPlaneLine 
 } from 'react-icons/ri'
+import visa from '../assets/svg/visa.svg'
+import mastercard from '../assets/svg/mastercard.svg'
+import paypal from '../assets/svg/paypal.svg'
 
 
 function Footer() {
     // states
     const theme = useTheme();
+    const screenMD = useMediaQuery(theme.breakpoints.down('1100'))
 
     // Custom Styles
     const iconBtn = {
@@ -42,12 +47,12 @@ function Footer() {
     ]
     
   return (
-    <Box bgcolor='black' px='7.5%' py='2.5%'>
+    <Box bgcolor='black' px={{xl: '7.5%', lg: '5%', md:'2.5%'}} py='2.5%'>
         <Container maxWidth='100%'>
-            <Grid container alignItems='center' justifyContent='space-between' spacing={2}>
+            <Grid container alignItems='center' justifyContent='space-between' direction={screenMD ? 'column':'row'}>
                 
                 {/* -------------- LEFT --------------- */}
-                <Grid  item direction='column'>
+                <Grid  item direction='column' mb='1.5rem'>
                     <Box maxWidth='100px' mb='1rem'>
                         <img src={home2} alt="home2" style={{width:'100%'}}/>
                     </Box>
@@ -72,12 +77,12 @@ function Footer() {
                 </Grid>
 
                 {/* -------------- MIDDLE --------------- */}
-                <Grid  item direction='column'>
+                <Grid  item direction='column' mb='1.5rem'>
                     <Typography variant='h6' color='white' mb='1rem'>Company</Typography>
 
                     <Grid container direction='column'>
 
-                        <Grid container direction='row' minWidth='250px' justifyContent='space-between'>
+                        <Grid container direction='row' width={screenMD ? '240px':{xl:'240px',xs:'180px'}} justifyContent='space-between'>
                             <Grid item direction='column'>
                                 <Typography variant='subtitle2' color='white' mb='1rem'>About Us</Typography>
                                 <Typography variant='subtitle2' color='white' mb='1rem'>Shop</Typography>
@@ -97,7 +102,7 @@ function Footer() {
                 </Grid>
 
                 {/* -------------- RIGHT --------------- */}
-                <Grid  item direction='column' maxWidth='450px'>
+                <Grid  item direction='column' maxWidth={{lg:'450px', xs:'380px'}} mb='1.5rem'>
                     <Typography variant='h6' color='white' mb='1rem'>Newsletter</Typography>
 
                     <Typography variant='subtitle2' color='white' mb='1rem'>
@@ -111,7 +116,7 @@ function Footer() {
                                 // p: '2px 4px',
                                 display: 'flex',
                                 alignItems: 'center',
-                                width: 400, mb:'2.4rem',
+                                maxWidth: 400, mb:'2.4rem',
                                 borderRadius: '25px',
                                 bgcolor: '#424747',
                             }}
@@ -126,7 +131,7 @@ function Footer() {
                                 sx={{
                                     p: '10px', borderRadius:'50%', 
                                     bgcolor:theme.palette.secondary.main, right:'-2', 
-                                    '&:hover': {bgcolor:'black', color:'green'}
+                                    '&:hover': {bgcolor:'green'}
                                 }} 
                                 aria-label="search"
                             >
@@ -138,7 +143,29 @@ function Footer() {
 
             </Grid>
 
-            <Grid container></Grid>
+            <Grid 
+                container alignItems='center' 
+                justifyContent='space-between' 
+                direction={screenMD ? 'column':'row'}
+                mt='2rem'
+            >
+                <Box mb='2rem'>
+                    <Typography variant='subtitle2' color='white'>
+                        Copyright &copy; All Rights Reserveed
+                    </Typography>
+                </Box>
+                <Box>
+                    <IconButton sx={{width:'50px', bgcolor:'white'}}>
+                        <img src={visa} alt="visa" style={{width:'100%'}}/>
+                    </IconButton>
+                    <IconButton sx={{width:'50px'}}>
+                        <img src={mastercard} alt="mastercard" style={{width:'100%'}}/>
+                    </IconButton>
+                    <IconButton sx={{width:'50px'}}>
+                        <img src={paypal} alt="paypal" style={{width:'100%'}}/>
+                    </IconButton>
+                </Box>
+            </Grid>
         </Container>
     </Box>
   )
