@@ -160,7 +160,7 @@ function Navbar() {
 
   return (
     <React.Fragment>
-        <AppBar position='relative' sx={{zIndex: theme.zIndex.drawer+1}}>
+        <AppBar position='sticky' sx={{zIndex: theme.zIndex.drawer+1}}>
             <Toolbar disableGutters>
                 <Box 
                   sx={{
