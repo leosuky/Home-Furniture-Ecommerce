@@ -9,6 +9,9 @@ import './App.css';
 // Pages
 import {HomePage, AboutUsPage, BlogPage, ContactUsPage, ShopPage} from './pages'
 
+// for testing shit.... ||||||||||||||||||||||||||||||||
+// import Testing from './Testing';
+
 function App() {
   return (
     <div className="App">
@@ -23,6 +26,7 @@ function App() {
         </Routes>
         <Footer/>
       </ThemeProvider>
+      {/* <Testing/> */}
     </div>
   );
 }

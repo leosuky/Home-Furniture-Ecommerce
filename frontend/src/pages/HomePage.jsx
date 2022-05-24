@@ -21,6 +21,10 @@ import stocktake from '../assets/stocktake.png'
 // ICONS
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
+// COMPONENTS
+// import ProductCard from '../components/ProductCard';
+import ProductSlider from '../components/ProductSlider';
+
 
 // CUSTOM COMPONENTS
 const StyledButton = styled(Button)(({theme}) => ({
@@ -148,6 +152,11 @@ function HomePage() {
           </Box>
         </Box>
 
+      </Box>
+
+      {/* TOP PRODUCTS */}
+      <Box margin={{xs:'.3rem 2rem', sm:'2rem 4rem'}}>
+        <ProductSlider/>
       </Box>
 
     </Box>
