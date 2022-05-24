@@ -1,5 +1,6 @@
 import React, {useRef} from 'react'
-import { Box, IconButton } from '@mui/material'
+import { Box, IconButton, useMediaQuery } from '@mui/material'
+import { useTheme } from '@mui/material/styles';
 
 import styled from '@emotion/styled'
 import ProductCard from './ProductCard'
@@ -20,23 +21,6 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 // _________________________________________________________________________________
 
-const elementWidth = 1050
-
-// Styled Component
-const SliderBox = styled(Box)(({theme}) => ({
-  display:'flex',
-  alignItems:'center',
-  justifyContent:'start',
-  gap:10,
-  width:`${elementWidth}px`,
-  transition:'.9s ease',
-  scrollBehavior:'smooth',
-  overflowX:'scroll',
-  '&::-webkit-scrollbar':{
-    width:0
-  }
-}))
-
 // ITEMS
 const products = [
   {id:1, image:bucklo_wrop_wood_table},
@@ -50,6 +34,28 @@ const products = [
 function ProductSlider() {
   // STATES
   const scrollRef = useRef(null)
+  const theme = useTheme();
+  const screenMD = useMediaQuery(theme.breakpoints.down('lg'))
+  const screenSM = useMediaQuery(theme.breakpoints.down('md'))
+  const screenXS = useMediaQuery(theme.breakpoints.down('sm'))
+
+  const elementWidth = screenXS ? 212 : screenSM ? 420 : screenMD ? 630 : 1050
+
+
+  // Styled Component
+  const SliderBox = styled(Box)(({theme}) => ({
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'start',
+    gap:10,
+    width:`${elementWidth}px`,
+    transition:'.9s ease',
+    scrollBehavior:'smooth',
+    overflowX:'scroll',
+    '&::-webkit-scrollbar':{
+      width:0
+    }
+  }))
 
 
   // CALLBACKS
@@ -57,9 +63,9 @@ function ProductSlider() {
     const { current } = scrollRef;
 
     if (direction === 'left') {
-      current.scrollLeft -= 250;
+      current.scrollLeft -= 210;
     } else {
-      current.scrollLeft += 250;
+      current.scrollLeft += 210;
     }
   };
 
