@@ -9,15 +9,12 @@ import {
 
 // ICONS & IMAGES
 import CircleIcon from '@mui/icons-material/Circle';
-// import bucklo_wrop_wood_table from '../assets/products/bucklo_wrop_wood_table.png'
 
 
-// bucklo_wrop_wood_table
-
-function ProductCard({image}) {
+function ProductCard({image, productName}) {
   return (
     <Box>
-      <Card sx={{width:'200px', border:'1px solid #e0e0e0'}}>
+      <Card sx={{width:'200px',height:'326px', border:'1px solid #e0e0e0'}}>
         <CardMedia
           component='img'
           alt='bucklo_wrop_wood_table'
@@ -31,8 +28,8 @@ function ProductCard({image}) {
           <CircleIcon fontSize='small' color='success'/>
         </Box>
         <CardContent sx={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
-          <Typography fontSize='.8rem'>
-            Bucklo Wrap Wooden Table
+          <Typography fontSize='.7rem' textAlign='center'>
+            {productName}
           </Typography>
           <Typography color='secondary' fontWeight={700}>$56.12</Typography>
         </CardContent>

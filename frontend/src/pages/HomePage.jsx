@@ -17,22 +17,30 @@ import workspace from '../assets/workspace.png'
 import accessories from '../assets/accessories.png'
 import chair_silver from '../assets/chair_silver.png'
 import stocktake from '../assets/stocktake.png'
+import banner_01 from '../assets/banner01.png'
+import banner_02 from '../assets/banner02.png'
+import banner_03 from '../assets/banner03.png'
+import banner_04 from '../assets/banner04.png'
+import banner_05 from '../assets/banner05.png'
+// __products_images
+import products from '../assets/products';
 
 // ICONS
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 // COMPONENTS
-// import ProductCard from '../components/ProductCard';
 import ProductSlider from '../components/ProductSlider';
 
 
 // CUSTOM COMPONENTS
-const StyledButton = styled(Button)(({theme}) => ({
-  width: '12rem',
+const StyledButton = styled(Button)(({theme, width}) => ({
+  width: width,
   color: theme.palette.primary.main,
   backgroundColor: theme.palette.secondary.main,
   padding: '8px, 20px',
   borderRadius: 50,
+  textTransform:'capitalize',
   '&:hover': {
     backgroundColor: theme.palette.secondary.light,}
 }))
@@ -41,6 +49,7 @@ const StyledButtonAlt = styled(Button)(({theme}) => ({
   backgroundColor : theme.palette.primary.main,
   color: theme.palette.secondary.main,
   borderRadius: 50,
+  textTransform:'capitalize',
   '&:hover': {
     backgroundColor: theme.palette.primary.dark,}
 }))
@@ -58,6 +67,61 @@ const Category = ({image, title}) => (
   </React.Fragment>
 )
 
+const BannerA = (
+  <>
+    <Box display='flex' alignItems='center' flexDirection='column' position='relative'>
+      <Box>
+        <img src={banner_01} alt="banner01" style={{width:'100%', objectFit:'cover'}}/>
+      </Box>
+      <Box position='absolute' sx={{bottom:'27.5%', left:'50%', transform:'translateX(-50%)'}}>
+        <StyledButton variant='contained' width='9rem' sx={{fontSize:'.7rem'}}>Explore Now</StyledButton>
+      </Box>
+    </Box>
+  </>
+)
+
+const BannerB = (
+  <>
+    <Box display='flex' alignItems='center' flexDirection='column'>
+      <Box display='flex' alignItems='center' gap={2}>
+        <Box>
+          <img src={banner_02} alt="banner02" style={{width:'100%', objectFit:'cover'}}/>
+        </Box>
+        <Box>
+          <img src={banner_03} alt="banner03" style={{width:'100%', objectFit:'cover'}}/>
+        </Box>
+      </Box>
+      <StyledButton variant='contained' width='9rem' sx={{fontSize:'.55rem', mt:'.7rem'}}>Explore Now</StyledButton>
+    </Box>
+  </>
+)
+
+const BannerC = (
+  <>
+    <Box display='flex' alignItems='center' flexDirection='column' position='relative'>
+      <Box>
+        <img src={banner_04} alt="banner01" style={{width:'100%', objectFit:'cover'}}/>
+      </Box>
+      <Box position='absolute' sx={{bottom:'15%', left:'50%', transform:'translateX(-50%)'}}>
+        <StyledButton variant='contained' width='9rem' sx={{fontSize:'.7rem'}}>Explore Now</StyledButton>
+      </Box>
+    </Box>
+  </>
+)
+
+const BannerD = (
+  <>
+    <Box display='flex' alignItems='center' flexDirection='column' position='relative'>
+      <Box>
+        <img src={banner_05} alt="banner01" style={{width:'100%', objectFit:'cover'}}/>
+      </Box>
+      <Box position='absolute' sx={{bottom:'15%', left:'50%', transform:'translateX(-50%)'}}>
+        <StyledButton variant='contained' width='9rem' sx={{fontSize:'.7rem'}}>Explore Now</StyledButton>
+      </Box>
+    </Box>
+  </>
+)
+
 // LISTS
 const categories = [
   {id:1, title:'Living room', image:living_room},
@@ -68,10 +132,44 @@ const categories = [
   {id:6, title:'Accessories', image:accessories},
 ]
 
+const bestSelling = [
+  {id:1, name:'Leosuky Rose Bar Stool', image:products.leosuky_rose_bar_stool},
+  {id:2, name:'Leosuky Bronze Outdoor Stools', image:products.leosuky_bronze_outdoor_stools},
+  {id:3, name:'Leosuky Wood Cabinet Table', image:products.leosuky_wood_cabinet_table},
+  {id:4, name:'Leosuky Exotic Lamp', image:products.leosuky_exotic_lamp},
+  {id:5, name:'Pierre Montblanc Ceiling Lamp', image:products.pierre_montblanc_ceil_lamp},
+  {id:6, name:'Leosuky Wood High Stool', image:products.leosuky_wood_high_stool},
+]
+
+const hotPrice = [
+  {id:1, name:'Leosuky Exotic Lamp', image:products.leosuky_exotic_lamp},
+  {id:2, name:'Jermaine Swiss Vase', image:products.Jermaine_swiss_vase},
+  {id:3, name:'Etienne Corduroy Cushion', image:products.Etienne_corduroy_cushion},
+  {id:4, name:'Kurosawa Luxury Armchair', image:products.kurosawa_luxury_armchair},
+  {id:5, name:'Leosuky Exotic Vase', image:products.leosuky_exotic_vase},
+  {id:6, name:'Leosuky Round Dining Table', image:products.leosuky_round_dining_table},
+]
+
+const exploreProducts = [
+  {id:1, name:'Monclaire Picture Frame', image:products.monclaire_picture_frame},
+  {id:2, name:'Nikari April Tables', image:products.Nikari_april_tables},
+  {id:3, name:'Etienne Wool Cushion', image:products.Etienne_wool_cushions},
+  {id:4, name:'Pavo Champagne Brass Lamp', image:products.Pavo_champng_brass_lamp},
+]
+
+const topTrends = [
+  {id:1, name:'Brass Hexagon Mirror Panel', image:products.Brass_Hexagon_Mirror_Panel},
+  {id:2, name:'Jensen Wallframes', image:products.Jensen_Wallframes},
+  {id:3, name:'Pavo Champagne Sinzu Lamp', image:products.Pavo_champng_sinzu_lamp},
+  {id:4, name:'Montclair Ceiling Lamp', image:products.montclair_ceil_lamps},
+  {id:4, name:'Leosuky Grande Bookshelf', image:products.leosuky_grand_bookshelf},
+]
+
 function HomePage() {
   // states
   const theme = useTheme();
   const screenSM = useMediaQuery(theme.breakpoints.down('sm'))
+  const screenMD = useMediaQuery(theme.breakpoints.down('md'))
 
 
   return (
@@ -90,7 +188,7 @@ function HomePage() {
           sx={{top:'50%', left:'50%', transform:'translate(-50%, -50%)', width:'fit-content'}}
         >
           <Typography variant='h2' fontWeight='700' fontSize={{xs:'1.3rem', sm:'2.5rem', md:'4rem'}} lineHeight={{xs:'1'}}>AWESOME FURNITURES</Typography>
-          <StyledButton variant='contained'>Take A Look</StyledButton>
+          <StyledButton variant='contained' width='10rem'>Take A Look</StyledButton>
         </Box>
       </Box>
 
@@ -104,7 +202,7 @@ function HomePage() {
       </Box>
 
       {/* OFFER SECTION */}
-      <Box display='flex' flexDirection={{xs:'column', md:'row'}} alignItems='center' justifyContent='space-between' margin={{xs:'.3rem 2rem', sm:'2rem 4rem'}}>
+      <Box display='flex' flexDirection={{xs:'column', md:'row'}} alignItems='center' justifyContent='space-between' margin={{xs:'1rem 2rem', sm:'2rem 4rem'}}>
 
         <Box position='relative' flex={0.65}>
           <Box>
@@ -155,8 +253,44 @@ function HomePage() {
       </Box>
 
       {/* TOP PRODUCTS */}
-      <Box margin={{xs:'.3rem 2rem', sm:'2rem 4rem'}}>
-        <ProductSlider/>
+      <Box margin={{xs:'2rem, 1.2rem', sm:'2rem 4rem'}} bgcolor='#fbf4f3' padding={{xs:'1.5rem 2.3rem', sm:'1.5rem 4rem'}} border='2px solid #DA3E31'>
+        <Box display='flex' flexDirection='column' alignItems='center' mt='1.5rem'>
+          <Typography fontWeight={700} mb='1rem'>Best Selling</Typography>
+          <ProductSlider products={bestSelling}/>
+          <Button variant='text' color='secondary' endIcon={<ChevronRightIcon/>}>View All</Button>
+        </Box>
+
+        <Box display='flex' flexDirection='column' alignItems='center' mt='2.5rem'>
+          <Typography fontWeight={700} mb='1rem'>Hot Price</Typography>
+          <ProductSlider products={hotPrice}/>
+          <Button variant='text' color='secondary' endIcon={<ChevronRightIcon/>}>View All</Button>
+        </Box>
+      </Box>
+
+      {/* BANNER 01 */}
+      <Box margin={{xs:'2rem 1.5rem', sm:'2rem 4rem'}}>
+        {
+          screenMD ? BannerB : BannerA
+        }
+      </Box>
+
+      {/* EXPLORE PRODUCTS */}
+      <Box display='flex' flexDirection='column' alignItems='center' mt='2.5rem'>
+        <Typography fontWeight={700} mb='1rem'>Explore Our Products</Typography>
+        <ProductSlider products={exploreProducts.concat(hotPrice)}/>
+      </Box>
+
+      {/* BANNER 02 */}
+      <Box margin={{xs:'2rem 1.5rem', sm:'2rem 4rem'}}>
+        {
+          screenMD ? BannerD : BannerC
+        }
+      </Box>
+
+      {/* TOP TRENDING PRODUCTS */}
+      <Box display='flex' flexDirection='column' alignItems='center' mt='2.5rem'>
+        <Typography fontWeight={700} mb='1rem'>Top Trending Products</Typography>
+        <ProductSlider products={topTrends.concat(exploreProducts)}/>
       </Box>
 
     </Box>

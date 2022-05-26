@@ -5,13 +5,6 @@ import { useTheme } from '@mui/material/styles';
 import styled from '@emotion/styled'
 import ProductCard from './ProductCard'
 
-// images
-import bucklo_wrop_wood_table from '../assets/products/bucklo_wrop_wood_table.png'
-import bucklo_exotic_lamp from '../assets/products/bucklo_exotic_lamp.png'
-import bucklo_wrop_bulbs from '../assets/products/bucklo_wrop_bulbs.png'
-import bucklo_wrop_crepe_tables from '../assets/products/bucklo_wrop_crepe_tables.png'
-import bucklo_wrop_table_metal from '../assets/products/bucklo_wrop_table_metal.png'
-import bucklo_wrop_work_table from '../assets/products/bucklo_wrop_work_table.png'
 
 // ICONS
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -21,17 +14,8 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 // _________________________________________________________________________________
 
-// ITEMS
-const products = [
-  {id:1, image:bucklo_wrop_wood_table},
-  {id:2, image:bucklo_exotic_lamp},
-  {id:3, image:bucklo_wrop_bulbs},
-  {id:4, image:bucklo_wrop_crepe_tables},
-  {id:5, image:bucklo_wrop_table_metal},
-  {id:6, image:bucklo_wrop_work_table},
-]
 
-function ProductSlider() {
+function ProductSlider({products}) {
   // STATES
   const scrollRef = useRef(null)
   const theme = useTheme();
@@ -74,7 +58,7 @@ function ProductSlider() {
       <SliderBox ref={scrollRef}>
         {
           products.map(item => (
-            <ProductCard image={item.image} key={item.id}/>
+            <ProductCard image={item.image} key={item.id} productName={item.name}/>
           ))
         }
       </SliderBox>
