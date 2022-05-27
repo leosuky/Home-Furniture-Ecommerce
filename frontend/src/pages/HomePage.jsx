@@ -1,7 +1,7 @@
 import React from 'react'
 import { 
   Box, Typography, Button, IconButton,
-  useMediaQuery
+  useMediaQuery, ImageList, ImageListItem
 } from '@mui/material'
 
 import styled from '@emotion/styled'
@@ -15,6 +15,9 @@ import kitchen from '../assets/kitchen.png'
 import bathroom from '../assets/bathroom.png'
 import workspace from '../assets/workspace.png'
 import accessories from '../assets/accessories.png'
+import pinkChair from '../assets/pinkChair.png'
+import japanLamp from '../assets/japanLamp.png'
+import rootCeramic from '../assets/rootCeramic.png'
 import chair_silver from '../assets/chair_silver.png'
 import stocktake from '../assets/stocktake.png'
 import banner_01 from '../assets/banner01.png'
@@ -22,6 +25,19 @@ import banner_02 from '../assets/banner02.png'
 import banner_03 from '../assets/banner03.png'
 import banner_04 from '../assets/banner04.png'
 import banner_05 from '../assets/banner05.png'
+import insta01 from '../assets/insta01.png'
+import insta02 from '../assets/insta02.png'
+import insta03 from '../assets/insta03.png'
+import insta04 from '../assets/insta04.png'
+import insta05 from '../assets/insta05.png'
+import basket_logo from '../assets/basket_logo.png'
+import breakfast_logo from '../assets/breakfast_logo.png'
+import linkedvoice_logo from '../assets/linkedvoice_logo.png'
+import ln_logo from '../assets/ln_logo.png'
+import logo3 from '../assets/logo3.png'
+import sensei_logo from '../assets/sensei_logo.png'
+import wavin_logo from '../assets/wavin_logo.png'
+
 // __products_images
 import products from '../assets/products';
 
@@ -53,6 +69,21 @@ const StyledButtonAlt = styled(Button)(({theme}) => ({
   '&:hover': {
     backgroundColor: theme.palette.primary.dark,}
 }))
+
+const Specials = ({color, topText, bottomText, image, percent}) => (
+  <>
+    <Box display='flex' width={{xs:'290px', sm:'450px'}} height={{xs:'190px', sm:'295px'}} alignItems='end' bgcolor={color} borderRadius={2} m={{xs:'1rem 0', sm:'2rem'}}>
+      <Box display='flex' flexDirection='column' alignItems='center' justifyContent='space-around' height='85%' m='10px' ml='30px'>
+        <Typography color={color === '#DA3E31' && 'primary'}>{topText} <br/> {bottomText}</Typography>
+        <Typography color={color ==='#CDD454' ? 'secondary' : (color !== '#F4F4F5' && 'primary')} fontWeight='700' variant='h3'>{percent}</Typography>
+        <StyledButtonAlt variant='contained' sx={{fontSize:'.8rem'}}>Shop Now</StyledButtonAlt>
+      </Box>
+      <Box m='10px' mb={0}>
+        <img src={image} alt="banner01" style={{width:'100%', objectFit:'cover'}}/>
+      </Box>
+    </Box>
+  </>
+)
 
 const Category = ({image, title}) => (
   <React.Fragment>
@@ -132,37 +163,69 @@ const categories = [
   {id:6, title:'Accessories', image:accessories},
 ]
 
+const instagram = [
+  {id:1, image:insta01},
+  {id:2, image:insta02},
+  {id:3, image:insta03},
+  {id:4, image:insta04},
+  {id:5, image:insta05},
+]
+
+const logos = [
+  {id:0, image:basket_logo},
+  {id:1, image:breakfast_logo},
+  {id:2, image:linkedvoice_logo},
+  {id:3, image:ln_logo},
+  {id:4, image:logo3},
+  {id:5, image:sensei_logo},
+  {id:6, image:wavin_logo},
+]
+
+const specialZ = [
+  {id:7, color:'#DA3E31', image:pinkChair, topText:'Accent', bottomText:'Arm Chair', percent:'-30%'},
+  {id:8, color:'#F4F4F5', image:rootCeramic, topText:'Rivet Geometric', bottomText:'Ceramic Planter', percent:'-40%'},
+  {id:9, color:'#CDD454', image:japanLamp, topText:'Ceramic', bottomText:'Japanese Lamp', percent:'-50%'},
+]
+
 const bestSelling = [
-  {id:1, name:'Leosuky Rose Bar Stool', image:products.leosuky_rose_bar_stool},
-  {id:2, name:'Leosuky Bronze Outdoor Stools', image:products.leosuky_bronze_outdoor_stools},
-  {id:3, name:'Leosuky Wood Cabinet Table', image:products.leosuky_wood_cabinet_table},
-  {id:4, name:'Leosuky Exotic Lamp', image:products.leosuky_exotic_lamp},
-  {id:5, name:'Pierre Montblanc Ceiling Lamp', image:products.pierre_montblanc_ceil_lamp},
-  {id:6, name:'Leosuky Wood High Stool', image:products.leosuky_wood_high_stool},
+  {id:10, name:'Leosuky Wood High Stool', image:products.leosuky_wood_high_stool},
+  {id:11, name:'Leosuky Rose Bar Stool', image:products.leosuky_rose_bar_stool},
+  {id:12, name:'Leosuky Bronze Outdoor Stools', image:products.leosuky_bronze_outdoor_stools},
+  {id:13, name:'Leosuky Wood Cabinet Table', image:products.leosuky_wood_cabinet_table},
+  {id:14, name:'Leosuky Exotic Lamp', image:products.leosuky_exotic_lamp},
+  {id:15, name:'Pierre Montblanc Ceiling Lamp', image:products.pierre_montblanc_ceil_lamp},
 ]
 
 const hotPrice = [
-  {id:1, name:'Leosuky Exotic Lamp', image:products.leosuky_exotic_lamp},
-  {id:2, name:'Jermaine Swiss Vase', image:products.Jermaine_swiss_vase},
-  {id:3, name:'Etienne Corduroy Cushion', image:products.Etienne_corduroy_cushion},
-  {id:4, name:'Kurosawa Luxury Armchair', image:products.kurosawa_luxury_armchair},
-  {id:5, name:'Leosuky Exotic Vase', image:products.leosuky_exotic_vase},
-  {id:6, name:'Leosuky Round Dining Table', image:products.leosuky_round_dining_table},
+  {id:16, name:'Leosuky Round Dining Table', image:products.leosuky_round_dining_table},
+  {id:17, name:'Leosuky Exotic Lamp', image:products.leosuky_exotic_lamp},
+  {id:18, name:'Jermaine Swiss Vase', image:products.Jermaine_swiss_vase},
+  {id:19, name:'Etienne Corduroy Cushion', image:products.Etienne_corduroy_cushion},
+  {id:20, name:'Kurosawa Luxury Armchair', image:products.kurosawa_luxury_armchair},
+  {id:21, name:'Leosuky Exotic Vase', image:products.leosuky_exotic_vase},
 ]
 
 const exploreProducts = [
-  {id:1, name:'Monclaire Picture Frame', image:products.monclaire_picture_frame},
-  {id:2, name:'Nikari April Tables', image:products.Nikari_april_tables},
-  {id:3, name:'Etienne Wool Cushion', image:products.Etienne_wool_cushions},
-  {id:4, name:'Pavo Champagne Brass Lamp', image:products.Pavo_champng_brass_lamp},
+  {id:22, name:'Pavo Champagne Brass Lamp', image:products.Pavo_champng_brass_lamp},
+  {id:23, name:'Monclaire Picture Frame', image:products.monclaire_picture_frame},
+  {id:24, name:'Nikari April Tables', image:products.Nikari_april_tables},
+  {id:25, name:'Etienne Wool Cushion', image:products.Etienne_wool_cushions},
 ]
 
 const topTrends = [
-  {id:1, name:'Brass Hexagon Mirror Panel', image:products.Brass_Hexagon_Mirror_Panel},
-  {id:2, name:'Jensen Wallframes', image:products.Jensen_Wallframes},
-  {id:3, name:'Pavo Champagne Sinzu Lamp', image:products.Pavo_champng_sinzu_lamp},
-  {id:4, name:'Montclair Ceiling Lamp', image:products.montclair_ceil_lamps},
-  {id:4, name:'Leosuky Grande Bookshelf', image:products.leosuky_grand_bookshelf},
+  {id:26, name:'Brass Hexagon Mirror Panel', image:products.Brass_Hexagon_Mirror_Panel},
+  {id:27, name:'Jensen Wallframes', image:products.Jensen_Wallframes},
+  {id:28, name:'Pavo Champagne Sinzu Lamp', image:products.Pavo_champng_sinzu_lamp},
+  {id:29, name:'Montclair Ceiling Lamp', image:products.montclair_ceil_lamps},
+  {id:30, name:'Leosuky Grande Bookshelf', image:products.leosuky_grand_bookshelf},
+]
+
+const newArrivals = [
+  {id:31, name:'Carlo Colombo Chloe Bed', image:products.Carlo_Colombo_chloe_bed},
+  {id:32, name:'Leosuky Silver Cabinet', image:products.Leosuky_silver_cabinet},
+  {id:33, name:'Time by Olivier de Chrome', image:products.Time_Olivier_de_chrome},
+  {id:34, name:'Leosuky M1 Lounge Chair', image:products.leosuky_m1_lounge_chair},
+  {id:35, name:'Furniture Supreme la Javascript', image:products.furniture_supreme},
 ]
 
 function HomePage() {
@@ -292,6 +355,54 @@ function HomePage() {
         <Typography fontWeight={700} mb='1rem'>Top Trending Products</Typography>
         <ProductSlider products={topTrends.concat(exploreProducts)}/>
       </Box>
+
+      {/* SPECIALS */}
+      <Box margin={{xs:'2rem .3rem', sm:'2rem 4rem'}} display='flex' flexWrap='wrap' justifyContent='center'>
+        {
+          specialZ.map(item => ((
+            <Specials 
+              color={item.color}
+              topText={item.topText}
+              bottomText={item.bottomText}
+              image={item.image}
+              percent={item.percent}
+            />
+          )))
+        }
+      </Box>
+
+      {/* NEW ARRIVALS */}
+      <Box display='flex' flexDirection='column' alignItems='center' mt='2.5rem'>
+        <Typography fontWeight={700} mb='1rem'>New Arrivals</Typography>
+        <ProductSlider products={newArrivals.concat(exploreProducts)}/>
+      </Box>
+
+      {/* INSTAGRAM */}
+      <Box display='flex' flexDirection='column' alignItems='center' m={{xs:'1.5rem', sm:'2rem'}}>
+        <Typography fontWeight={700} mb={{xs:'.3rem', md:'1rem'}} sx={{textDecoration:'underline'}}>Follow Us On Instagram</Typography>
+
+        <ImageList cols={5}>
+          {
+            instagram.map(item => ((
+              <ImageListItem key={item.id}>
+                <img src={item.image} alt={`insta${item.id}`} loading='lazy' />
+              </ImageListItem>
+            )))
+          }
+        </ImageList>
+      </Box>
+
+      {/* PARTNERS */}
+      <Box margin={{xs:'2rem .3rem', sm:'2rem 4rem'}} display='flex' flexWrap='wrap' justifyContent='center'>
+        {
+          logos.map(item => ((
+            <Box key={item.id} m='10px'>
+              <img src={item.image} alt={`insta${item.id}`} />
+            </Box>
+          )))
+        }
+      </Box>
+
 
     </Box>
   )

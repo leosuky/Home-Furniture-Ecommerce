@@ -18,6 +18,11 @@ import Jensen_Wallframes from './Jensen_Wallframes.png'
 import Pavo_champng_sinzu_lamp from './Pavo_champng_sinzu_lamp.png'
 import montclair_ceil_lamps from './montclair_ceil_lamps.png'
 import leosuky_grand_bookshelf from './leosuky_grand_bookshelf.png'
+import Carlo_Colombo_chloe_bed from './Carlo_Colombo_chloe_bed.png'
+import Leosuky_silver_cabinet from './Leosuky_silver_cabinet.png'
+import Time_Olivier_de_chrome from './Time_Olivier_de_chrome.png'
+import leosuky_m1_lounge_chair from './leosuky_m1_lounge_chair.png'
+import furniture_supreme from './furniture_supreme.png'
 
 
 
@@ -45,6 +50,11 @@ const products = {
     Pavo_champng_sinzu_lamp,
     montclair_ceil_lamps,
     leosuky_grand_bookshelf,
+    Carlo_Colombo_chloe_bed,
+    Leosuky_silver_cabinet,
+    Time_Olivier_de_chrome,
+    leosuky_m1_lounge_chair,
+    furniture_supreme,
 }
 
 
