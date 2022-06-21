@@ -4,7 +4,6 @@ import {
   useMediaQuery, ImageList, ImageListItem
 } from '@mui/material'
 
-import styled from '@emotion/styled'
 import { useTheme } from '@mui/material/styles';
 
 // images
@@ -47,29 +46,10 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 // COMPONENTS
 import ProductSlider from '../components/ProductSlider';
+import { StyledButton, StyledButtonAlt } from '../components/Buttons';
 
 
-// CUSTOM COMPONENTS
-const StyledButton = styled(Button)(({theme, width}) => ({
-  width: width,
-  color: theme.palette.primary.main,
-  backgroundColor: theme.palette.secondary.main,
-  padding: '8px, 20px',
-  borderRadius: 50,
-  textTransform:'capitalize',
-  '&:hover': {
-    backgroundColor: theme.palette.secondary.light,}
-}))
-
-const StyledButtonAlt = styled(Button)(({theme}) => ({
-  backgroundColor : theme.palette.primary.main,
-  color: theme.palette.secondary.main,
-  borderRadius: 50,
-  textTransform:'capitalize',
-  '&:hover': {
-    backgroundColor: theme.palette.primary.dark,}
-}))
-
+// SMALLER COMPONENTS
 const Specials = ({color, topText, bottomText, image, percent}) => (
   <>
     <Box display='flex' width={{xs:'290px', sm:'450px'}} height={{xs:'190px', sm:'295px'}} alignItems='end' bgcolor={color} borderRadius={2} m={{xs:'1rem 0', sm:'2rem'}}>
@@ -256,7 +236,11 @@ function HomePage() {
       </Box>
 
       {/* CATEGORIES SECTION */}
-      <Box display='flex' alignItems='center' justifyContent='space-around' margin={{xs:'2.5rem 3rem', sm:'3rem 7rem'}} flexWrap='wrap'>
+      <Box 
+        display='flex' alignItems='center' width='60vw'
+        justifyContent='space-around' 
+        margin={{xs:'2.5rem 3rem', sm:'3rem 7rem'}} flexWrap='wrap'
+      >
         {
           categories.map((item) => (
             <Category key={item.id} image={item.image} title={item.title}/>

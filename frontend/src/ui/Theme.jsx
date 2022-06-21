@@ -1,6 +1,6 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
-const GlobalTheme = createTheme({
+let GlobalTheme = createTheme({
     palette: {
         common: {
             orange: '#C81809',
@@ -15,6 +15,7 @@ const GlobalTheme = createTheme({
     }
 })
 
+GlobalTheme = responsiveFontSizes(GlobalTheme)
 
 // breakpoints: {
 //     values: {
