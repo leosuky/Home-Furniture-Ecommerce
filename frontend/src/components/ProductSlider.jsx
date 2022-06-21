@@ -58,7 +58,7 @@ function ProductSlider({products}) {
       <SliderBox ref={scrollRef}>
         {
           products.map(item => (
-            <ProductCard image={item.image} key={item.id} productName={item.name}/>
+            <ProductCard image={item.image} key={item.id} productName={item.name} price={item.price}/>
           ))
         }
       </SliderBox>

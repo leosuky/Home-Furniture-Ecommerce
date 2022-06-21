@@ -23,6 +23,16 @@ import Leosuky_silver_cabinet from './Leosuky_silver_cabinet.png'
 import Time_Olivier_de_chrome from './Time_Olivier_de_chrome.png'
 import leosuky_m1_lounge_chair from './leosuky_m1_lounge_chair.png'
 import furniture_supreme from './furniture_supreme.png'
+import wendigo_wallclock from './wendigo_wallclock.png'
+import lacampagna_gold_trays from './lacampagna_gold_trays.png'
+import leosuky_vertical_lamp from './leosuky_vertical_lamp.png'
+import grey_tassel_pillow from './grey_tassel_pillow.png'
+import mesas_auxiliares_redondas from './mesas_auxiliares_redondas.png'
+import jameson_delux_stools from './jameson_delux_stools.png'
+import chaise_la_campagne from './chaise_la_campagne.png'
+import kawosky_wood_table from './kawosky_wood_table.png'
+import federico_cushion_stools from './federico_cushion_stools.png'
+import al_hilal_high_chair from './al_hilal_high_chair.png'
 
 
 
@@ -55,6 +65,16 @@ const products = {
     Time_Olivier_de_chrome,
     leosuky_m1_lounge_chair,
     furniture_supreme,
+    wendigo_wallclock,
+    lacampagna_gold_trays,
+    leosuky_vertical_lamp,
+    grey_tassel_pillow,
+    mesas_auxiliares_redondas,
+    jameson_delux_stools,
+    chaise_la_campagne,
+    kawosky_wood_table,
+    federico_cushion_stools,
+    al_hilal_high_chair,
 }
 
 

@@ -11,7 +11,7 @@ import {
 import CircleIcon from '@mui/icons-material/Circle';
 
 
-function ProductCard({image, productName}) {
+function ProductCard({image, productName, price}) {
   return (
     <Box>
       <Card sx={{width:'200px',height:'326px', border:'1px solid #e0e0e0'}}>
@@ -31,7 +31,7 @@ function ProductCard({image, productName}) {
           <Typography fontSize='.7rem' textAlign='center'>
             {productName}
           </Typography>
-          <Typography color='secondary' fontWeight={700}>$56.12</Typography>
+          <Typography color='secondary' fontWeight={700}>${price}</Typography>
         </CardContent>
         <CardActions sx={{justifyContent:'center'}}>
           <Button size='small' color='secondary'>Add to Cart</Button>

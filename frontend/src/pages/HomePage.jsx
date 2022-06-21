@@ -8,12 +8,6 @@ import { useTheme } from '@mui/material/styles';
 
 // images
 import home_furniture from '../assets/home_furniture.png'
-import living_room from '../assets/living_room.png'
-import bedroom from '../assets/bedroom.png'
-import kitchen from '../assets/kitchen.png'
-import bathroom from '../assets/bathroom.png'
-import workspace from '../assets/workspace.png'
-import accessories from '../assets/accessories.png'
 import pinkChair from '../assets/pinkChair.png'
 import japanLamp from '../assets/japanLamp.png'
 import rootCeramic from '../assets/rootCeramic.png'
@@ -37,8 +31,6 @@ import logo3 from '../assets/logo3.png'
 import sensei_logo from '../assets/sensei_logo.png'
 import wavin_logo from '../assets/wavin_logo.png'
 
-// __products_images
-import products from '../assets/products';
 
 // ICONS
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -47,6 +39,9 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 // COMPONENTS
 import ProductSlider from '../components/ProductSlider';
 import { StyledButton, StyledButtonAlt } from '../components/Buttons';
+
+// LISTS
+import { categories, data } from '../data';
 
 
 // SMALLER COMPONENTS
@@ -134,15 +129,6 @@ const BannerD = (
 )
 
 // LISTS
-const categories = [
-  {id:1, title:'Living room', image:living_room},
-  {id:2, title:'Bedroom', image:bedroom},
-  {id:3, title:'Kitchen', image:kitchen},
-  {id:4, title:'Bathroom', image:bathroom},
-  {id:5, title:'Workspace', image:workspace},
-  {id:6, title:'Accessories', image:accessories},
-]
-
 const instagram = [
   {id:1, image:insta01},
   {id:2, image:insta02},
@@ -166,47 +152,21 @@ const specialZ = [
   {id:8, color:'#F4F4F5', image:rootCeramic, topText:'Rivet Geometric', bottomText:'Ceramic Planter', percent:'-40%'},
   {id:9, color:'#CDD454', image:japanLamp, topText:'Ceramic', bottomText:'Japanese Lamp', percent:'-50%'},
 ]
+// --------------------------------------------------------------------------
+// Get random elements from an array.
+function getMultipleRandom(arr, num) {
+  const shuffled = [...arr].sort(() => 0.5 - Math.random());
 
-const bestSelling = [
-  {id:10, name:'Leosuky Wood High Stool', image:products.leosuky_wood_high_stool},
-  {id:11, name:'Leosuky Rose Bar Stool', image:products.leosuky_rose_bar_stool},
-  {id:12, name:'Leosuky Bronze Outdoor Stools', image:products.leosuky_bronze_outdoor_stools},
-  {id:13, name:'Leosuky Wood Cabinet Table', image:products.leosuky_wood_cabinet_table},
-  {id:14, name:'Leosuky Exotic Lamp', image:products.leosuky_exotic_lamp},
-  {id:15, name:'Pierre Montblanc Ceiling Lamp', image:products.pierre_montblanc_ceil_lamp},
-]
+  return shuffled.slice(0, num);
+}
 
-const hotPrice = [
-  {id:16, name:'Leosuky Round Dining Table', image:products.leosuky_round_dining_table},
-  {id:17, name:'Leosuky Exotic Lamp', image:products.leosuky_exotic_lamp},
-  {id:18, name:'Jermaine Swiss Vase', image:products.Jermaine_swiss_vase},
-  {id:19, name:'Etienne Corduroy Cushion', image:products.Etienne_corduroy_cushion},
-  {id:20, name:'Kurosawa Luxury Armchair', image:products.kurosawa_luxury_armchair},
-  {id:21, name:'Leosuky Exotic Vase', image:products.leosuky_exotic_vase},
-]
+// PRODUCTS SELECTIONS
+const bestSelling = getMultipleRandom(data, 8)
+const hotPrice = getMultipleRandom(data, 8)
+const exploreProducts = getMultipleRandom(data, 8)
+const topTrends = getMultipleRandom(data, 8)
+const newArrivals = getMultipleRandom(data, 8)
 
-const exploreProducts = [
-  {id:22, name:'Pavo Champagne Brass Lamp', image:products.Pavo_champng_brass_lamp},
-  {id:23, name:'Monclaire Picture Frame', image:products.monclaire_picture_frame},
-  {id:24, name:'Nikari April Tables', image:products.Nikari_april_tables},
-  {id:25, name:'Etienne Wool Cushion', image:products.Etienne_wool_cushions},
-]
-
-const topTrends = [
-  {id:26, name:'Brass Hexagon Mirror Panel', image:products.Brass_Hexagon_Mirror_Panel},
-  {id:27, name:'Jensen Wallframes', image:products.Jensen_Wallframes},
-  {id:28, name:'Pavo Champagne Sinzu Lamp', image:products.Pavo_champng_sinzu_lamp},
-  {id:29, name:'Montclair Ceiling Lamp', image:products.montclair_ceil_lamps},
-  {id:30, name:'Leosuky Grande Bookshelf', image:products.leosuky_grand_bookshelf},
-]
-
-const newArrivals = [
-  {id:31, name:'Carlo Colombo Chloe Bed', image:products.Carlo_Colombo_chloe_bed},
-  {id:32, name:'Leosuky Silver Cabinet', image:products.Leosuky_silver_cabinet},
-  {id:33, name:'Time by Olivier de Chrome', image:products.Time_Olivier_de_chrome},
-  {id:34, name:'Leosuky M1 Lounge Chair', image:products.leosuky_m1_lounge_chair},
-  {id:35, name:'Furniture Supreme la Javascript', image:products.furniture_supreme},
-]
 
 function HomePage() {
   // states
@@ -324,7 +284,7 @@ function HomePage() {
       {/* EXPLORE PRODUCTS */}
       <Box display='flex' flexDirection='column' alignItems='center' mt='2.5rem'>
         <Typography fontWeight={700} mb='1rem'>Explore Our Products</Typography>
-        <ProductSlider products={exploreProducts.concat(hotPrice)}/>
+        <ProductSlider products={exploreProducts}/>
       </Box>
 
       {/* BANNER 02 */}
@@ -337,7 +297,7 @@ function HomePage() {
       {/* TOP TRENDING PRODUCTS */}
       <Box display='flex' flexDirection='column' alignItems='center' mt='2.5rem'>
         <Typography fontWeight={700} mb='1rem'>Top Trending Products</Typography>
-        <ProductSlider products={topTrends.concat(exploreProducts)}/>
+        <ProductSlider products={topTrends}/>
       </Box>
 
       {/* SPECIALS */}
@@ -358,7 +318,7 @@ function HomePage() {
       {/* NEW ARRIVALS */}
       <Box display='flex' flexDirection='column' alignItems='center' mt='2.5rem'>
         <Typography fontWeight={700} mb='1rem'>New Arrivals</Typography>
-        <ProductSlider products={newArrivals.concat(exploreProducts)}/>
+        <ProductSlider products={newArrivals}/>
       </Box>
 
       {/* INSTAGRAM */}

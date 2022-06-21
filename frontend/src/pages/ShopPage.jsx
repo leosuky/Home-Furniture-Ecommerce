@@ -5,45 +5,19 @@ import {
 } from '@mui/material'
 
 import { useTheme } from '@mui/material/styles';
+import PriceSlider from '../components/PriceSlider';
+import { StyledButtonAlt } from '../components/Buttons';
+
+// lists
+import { categories, colors, furniture_type } from '../data';
 
 // images
 import shoppage_banner from '../assets/shoppage_banner.png'
+import chair_silver from '../assets/chair_silver.png'
 
 // icons
 import CircleIcon from '@mui/icons-material/Circle';
 
-// lists
-const categories = [
-  {id:0, name:'Accessories'},
-  {id:1, name:'Bathroom'},
-  {id:2, name:'Bedroom'},
-  {id:3, name:'Kitchen'},
-  {id:4, name:'Living Room'},
-  {id:5, name:'Workspace'},
-]
-
-const furniture_type = [
-  {id:0, name:'Wooden'},
-  {id:1, name:'Iron'},
-  {id:2, name:'Ceramic'},
-  {id:3, name:'Material'},
-  {id:4, name:'Glass'},
-]
-
-const colors = [
-  {id:0, name:'black'},
-  {id:1, name:'#828282'},
-  {id:2, name:'#bdbdbd'},
-  {id:3, name:'#0f2c72'},
-  {id:4, name:'#eb5757'},
-  {id:5, name:'#f2994a'},
-  {id:6, name:'#cdd454'},
-  {id:7, name:'#219653'},
-  {id:8, name:'#6fcf97'},
-  {id:9, name:'brown'},
-  {id:10, name:'#2f80ed'},
-  {id:10, name:'#bb6bd9'},
-]
 
 
 function ShopPage() {
@@ -111,7 +85,7 @@ function ShopPage() {
                     <CircleIcon fontSize='small'/>
                   </ListItemIcon>
                   <ListItemText 
-                    primary={item.name}
+                    primary={item.title}
                     sx={{
                         '&>span':{
                           fontWeight: category[item.id] === 1?'700':'auto'
@@ -169,6 +143,36 @@ function ShopPage() {
                 </IconButton>
               )))
             }
+          </Box>
+
+          {/* PRICE SLIDER */}
+          <Divider sx={{m:'1rem 0'}} />
+          <Typography color='black' fontWeight='700'>Price Range</Typography>
+          <PriceSlider/>
+
+          {/* OFFER */}
+          <Divider sx={{m:'1rem 0'}} />
+          <Box position='relative' marginTop={{xs:'1rem', md:'0'}} maxWidth='300px'>
+            <Box bgcolor='#e8e8e8' height='4.8rem' mb='0' display='flex' alignItems={{xs:'center', sm:'end'}} justifyContent='center'>
+              <Typography variant='h4' fontWeight='700' color='secondary' fontSize={{xs:'1rem', sm:'1.5rem', md:'2rem'}}>Special Offer</Typography>
+            </Box>
+            <Box position='relative'>
+              <img src={chair_silver} alt="chair_silver" style={{width:'100%'}}/>
+              <Box 
+                position='absolute' width={{xs:'2.5rem', sm:'4rem'}} 
+                height={{xs:'2.5rem', sm:'4rem'}} bgcolor={theme.palette.secondary.main}
+                sx={{textAlign:'center', borderRadius:50, right:'25%', top:'15%'}}
+              >
+                <Typography 
+                  variant='p' color='primary' 
+                  position='absolute' fontSize={{xs:'.6rem', sm:'1rem'}}
+                  sx={{top:'50%', left:'50%', transform:'translate(-50%, -50%)'}}
+                >from $39.99</Typography>
+              </Box>
+              <Box position='absolute' sx={{bottom:'2.5%', left:'50%', transform:'translateX(-50%)'}}>
+                <StyledButtonAlt variant='contained' sx={{fontSize:'.5rem'}}>Shop Now</StyledButtonAlt>
+              </Box>
+            </Box>
           </Box>
           
         </Box>
