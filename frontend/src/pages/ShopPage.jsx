@@ -1,15 +1,16 @@
 import React from 'react'
 import {
   Box, Checkbox, Divider, IconButton, List, ListItemButton, 
-  ListItemIcon, ListItemText, Stack, Typography,
+  ListItemIcon, ListItemText, Stack, Typography, useMediaQuery
 } from '@mui/material'
 
 import { useTheme } from '@mui/material/styles';
 import PriceSlider from '../components/PriceSlider';
+import ProductsView from '../components/ProductsView';
 import { StyledButtonAlt } from '../components/Buttons';
 
 // lists
-import { categories, colors, furniture_type } from '../data';
+import { categories, colors, furniture_type, data } from '../data';
 
 // images
 import shoppage_banner from '../assets/shoppage_banner.png'
@@ -25,6 +26,7 @@ function ShopPage() {
   const [checked, setChecked] = React.useState([0,0,0,0,0])
   const [category, setCategory] = React.useState([0,0,0,0,0,0])
   const theme = useTheme()
+  const xyxy = useMediaQuery(theme.breakpoints.down('1100'))
 
 
   const handleCheck = (value, name) => {
@@ -57,16 +59,16 @@ function ShopPage() {
 
         <Box position='absolute' sx={{top:'50%', left:'50%', transform:'translate(-50%, -50%)'}} textAlign='center'>
           <Typography variant='body1' color='#5d5f5f' fontWeight='700' fontSize={{xs:'.7rem', sm:'1rem'}}>
-            Shop our newest items, made with love by the worlds by artisans.
+            Shop our newest items, made with love by the worlds best artisans.
           </Typography>
         </Box>
       </Box>
 
       {/* SHOP CONTENT */}
-      <Stack direction='row' mt='2rem' justifyContent='space-between' width='80vw'>
+      <Stack direction='row' mt='2rem' mb='3rem' justifyContent='space-between' width={{xs:'90vw', md:'85vw', lg:'80vw'}}>
 
         {/* FILTERS */}
-        <Box color='white' flex={.25} display={{xs:'none', md:'block'}}>
+        <Box color='white' flex={.30} display={{xs:'none', md:'block'}}>
 
           {/* CATEGORIES */}
           <Divider sx={{mb:'1rem'}} />
@@ -152,9 +154,9 @@ function ShopPage() {
 
           {/* OFFER */}
           <Divider sx={{m:'1rem 0'}} />
-          <Box position='relative' marginTop={{xs:'1rem', md:'0'}} maxWidth='300px'>
+          <Box position='relative' marginTop={{xs:'1rem', md:'0'}}  display={xyxy?'none':'block'}>
             <Box bgcolor='#e8e8e8' height='4.8rem' mb='0' display='flex' alignItems={{xs:'center', sm:'end'}} justifyContent='center'>
-              <Typography variant='h4' fontWeight='700' color='secondary' fontSize={{xs:'1rem', sm:'1.5rem', md:'2rem'}}>Special Offer</Typography>
+              <Typography variant='h4' fontWeight='700' color='secondary' fontSize={{xs:'1rem', sm:'1.5rem',}}>Special Offer</Typography>
             </Box>
             <Box position='relative'>
               <img src={chair_silver} alt="chair_silver" style={{width:'100%'}}/>
@@ -178,7 +180,9 @@ function ShopPage() {
         </Box>
 
         {/* PRODUCTS */}
-        <Box bgcolor='green' color='white' flex={{xs:1, md:.75}}>Green</Box>
+        <Box color='white' flex={{xs:1, md:.65}}>
+          <ProductsView data={data}/>
+        </Box>
       </Stack>
 
     </Box>
