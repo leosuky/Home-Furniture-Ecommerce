@@ -310,6 +310,7 @@ function HomePage() {
               bottomText={item.bottomText}
               image={item.image}
               percent={item.percent}
+              key={item.id}
             />
           )))
         }

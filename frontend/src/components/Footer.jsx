@@ -4,10 +4,11 @@ import {
     Box, Container,
     Grid, Typography,
     IconButton,
-    Paper, InputBase,
+    // Paper, InputBase,
     useMediaQuery,
 } from '@mui/material'
 
+import InputField from './InputField';
 import { useTheme } from '@mui/material/styles';
 import home2 from '../assets/HOME2.png'
 
@@ -109,36 +110,13 @@ function Footer() {
                         Sign up for our Newsletter to get even more events, promotions & news from us
                     </Typography>
 
-                    <Box>
-                        <Paper 
-                            component='form'
-                            sx={{
-                                // p: '2px 4px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                maxWidth: 400, mb:'2.4rem',
-                                borderRadius: '25px',
-                                bgcolor: '#424747',
-                            }}
-                        >
-                            <InputBase
-                                sx={{ml:2, flex:1, color:'white'}}
-                                placeholder='Enter your email'
-                                aria-label='Newsletter'
-                            />
-                            <IconButton 
-                                type="submit" 
-                                sx={{
-                                    p: '10px', borderRadius:'50%', 
-                                    bgcolor:theme.palette.secondary.main, right:'-2', 
-                                    '&:hover': {bgcolor:'green'}
-                                }} 
-                                aria-label="search"
-                            >
-                                <RiSendPlaneLine fill='white'/>
-                            </IconButton>
-                        </Paper>
-                    </Box>
+                        {/* Newsletter */}
+                    <InputField 
+                        width={400} icon={<RiSendPlaneLine fill='white'/>}
+                        iconbg={theme.palette.secondary.main} paperbg='#424747'
+                        placeholder='Enter your email' inputColor='white'
+                        iconbgHover='green'
+                    />
                 </Grid>
 
             </Grid>
