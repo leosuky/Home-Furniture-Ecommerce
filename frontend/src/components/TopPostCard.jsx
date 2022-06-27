@@ -5,13 +5,13 @@ import { Box, Card, CardMedia, CardContent, Typography } from '@mui/material'
 
 function TopPostCard({title, date, image}) {
   return (
-    <Card sx={{display:'flex', mb:'1rem', alignItems:'center'}}>
+    <Card sx={{display:'flex', mb:'1rem', alignItems:'center', boxShadow:'none'}}>
         <Box width='90px' mr='15px'>
             <CardMedia
                 component='img'
                 alt='card_content'
                 src={image}
-                width='90px !important'
+                sx={{width:'90px'}}
             />
         </Box>
 

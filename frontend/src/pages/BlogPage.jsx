@@ -1,21 +1,38 @@
 import React from 'react'
-import { Box, Stack, Typography } from '@mui/material'
+import { Box, Stack, Typography, Pagination } from '@mui/material'
 import { useTheme } from '@mui/material/styles';
 
 import InputField from '../components/InputField'
 import TopPostCard from '../components/TopPostCard';
 import BlogPostCard from '../components/BlogPostCard';
 
-import { top_posts } from '../data';
+import { top_posts, blog_posts } from '../data';
 import {RiSearchLine} from 'react-icons/ri'
 
 function BlogPage() {
+  // STATES
   const theme = useTheme()
+  const [blogs, setBlogs] = React.useState([])
+  const [paginationCount, setPaginationCount] = React.useState()
+
+  React.useEffect(() => {
+    const first_blog = blog_posts.slice(0,9)
+    const countPagination = Math.ceil((blog_posts.length) / 9)
+    setPaginationCount(countPagination)
+    setBlogs(first_blog)
+  }, [])
+
+  const switchBlogs = (event, value) => {
+    const start = (value-1) * 9
+
+    const next = blog_posts.slice(start, (9+start))
+    setBlogs(next)
+  }
 
   return (
     <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
 
-      <Stack direction='row' width='85vw' margin='2.5rem 0'>
+      <Stack direction={{xs:'column-reverse', lg:'row'}} width='85vw' margin='2.5rem 0'>
         {/* TOP STORIES */}
         <Box flex={0.3} display='flex' flexDirection='column' alignItems='center'>
           <Box margin='1rem' width='70%' mb='1.5rem'>
@@ -45,8 +62,31 @@ function BlogPage() {
         </Box>
 
         {/* BLOG CONTENT */}
-        <Box flex={0.7} bgcolor='blue'>
-            <BlogPostCard/>
+        <Box flex={0.7} display='flex' alignItems='center' flexDirection='column'>
+          <Box display='flex' flexWrap='wrap' alignItems='flex-start' justifyContent='center'>
+            {
+              blogs.map(item => (
+                <Box m='1rem'>
+                  <BlogPostCard
+                      title={item.title}
+                      author={item.author}
+                      date={item.date}
+                      image={item.image}
+                      key={item.id}
+                    />
+                </Box>
+              ))
+            }
+          </Box>
+            
+          <Box mt='1.5rem' mb='2rem'>
+            <Pagination 
+              count={paginationCount}
+              shape='rounded'
+              color='secondary'
+              onChange={switchBlogs}
+            />
+          </Box>
         </Box>
       </Stack>
 
