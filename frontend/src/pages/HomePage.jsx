@@ -23,13 +23,6 @@ import insta02 from '../assets/insta02.png'
 import insta03 from '../assets/insta03.png'
 import insta04 from '../assets/insta04.png'
 import insta05 from '../assets/insta05.png'
-import basket_logo from '../assets/basket_logo.png'
-import breakfast_logo from '../assets/breakfast_logo.png'
-import linkedvoice_logo from '../assets/linkedvoice_logo.png'
-import ln_logo from '../assets/ln_logo.png'
-import logo3 from '../assets/logo3.png'
-import sensei_logo from '../assets/sensei_logo.png'
-import wavin_logo from '../assets/wavin_logo.png'
 
 
 // ICONS
@@ -39,6 +32,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 // COMPONENTS
 import ProductSlider from '../components/ProductSlider';
 import { StyledButton, StyledButtonAlt } from '../components/Buttons';
+import Partners from '../components/Partners';
 
 // LISTS
 import { categories, data } from '../data';
@@ -135,16 +129,6 @@ const instagram = [
   {id:3, image:insta03},
   {id:4, image:insta04},
   {id:5, image:insta05},
-]
-
-const logos = [
-  {id:0, image:basket_logo},
-  {id:1, image:breakfast_logo},
-  {id:2, image:linkedvoice_logo},
-  {id:3, image:ln_logo},
-  {id:4, image:logo3},
-  {id:5, image:sensei_logo},
-  {id:6, image:wavin_logo},
 ]
 
 const specialZ = [
@@ -338,15 +322,7 @@ function HomePage() {
       </Box>
 
       {/* PARTNERS */}
-      <Box margin={{xs:'2rem .3rem', sm:'2rem 4rem'}} display='flex' flexWrap='wrap' justifyContent='center'>
-        {
-          logos.map(item => ((
-            <Box key={item.id} m='10px'>
-              <img src={item.image} alt={`insta${item.id}`} />
-            </Box>
-          )))
-        }
-      </Box>
+      <Partners/>
 
 
     </Box>
