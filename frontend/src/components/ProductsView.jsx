@@ -33,7 +33,7 @@ function ProductsView({data}) {
         >
             {
                 products.map((item) => (
-                    <ProductCard image={item.image} key={item.id} productName={item.name} price={item.price}/>
+                    <ProductCard id={item.id} image={item.image} key={item.id} productName={item.name} price={item.price}/>
                 ))
             }
         </Box>
