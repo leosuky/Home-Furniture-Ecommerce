@@ -2,7 +2,8 @@ import React from 'react'
 import {
   Box, Checkbox, Divider, IconButton, List, ListItemButton, 
   ListItemIcon, ListItemText, Stack, Typography, useMediaQuery
-} from '@mui/material'
+} from '@mui/material';
+import axios from 'axios';
 
 import { useTheme } from '@mui/material/styles';
 import PriceSlider from '../components/PriceSlider';
@@ -10,7 +11,7 @@ import ProductsView from '../components/ProductsView';
 import { StyledButtonAlt } from '../components/Buttons';
 
 // lists
-import { categories, colors, furniture_type, data } from '../data';
+import { categories, colors, furniture_type } from '../data';
 
 // images
 import shoppage_banner from '../assets/shoppage_banner.png'
@@ -25,6 +26,7 @@ function ShopPage() {
   // states
   const [checked, setChecked] = React.useState([0,0,0,0,0])
   const [category, setCategory] = React.useState([0,0,0,0,0,0])
+  const [data, setData] = React.useState([])
   const theme = useTheme()
   const xyxy = useMediaQuery(theme.breakpoints.down('1100'))
 
@@ -44,6 +46,16 @@ function ShopPage() {
     }
     
   }
+
+  React.useEffect(() => {
+    async function getProducts() {
+      const response = await axios.get('api/shop/products/')
+      // console.log(response.data)
+      setData(response.data)
+    }
+
+    getProducts()
+  }, [])
   
 
 

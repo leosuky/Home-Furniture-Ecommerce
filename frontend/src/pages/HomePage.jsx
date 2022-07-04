@@ -2,7 +2,8 @@ import React from 'react'
 import { 
   Box, Typography, Button, IconButton,
   useMediaQuery, ImageList, ImageListItem
-} from '@mui/material'
+} from '@mui/material';
+import axios from 'axios';
 
 import { useTheme } from '@mui/material/styles';
 
@@ -35,7 +36,7 @@ import { StyledButton, StyledButtonAlt } from '../components/Buttons';
 import Partners from '../components/Partners';
 
 // LISTS
-import { categories, data } from '../data';
+import { categories } from '../data';
 
 
 // SMALLER COMPONENTS
@@ -137,26 +138,40 @@ const specialZ = [
   {id:9, color:'#CDD454', image:japanLamp, topText:'Ceramic', bottomText:'Japanese Lamp', percent:'-50%'},
 ]
 // --------------------------------------------------------------------------
-// Get random elements from an array.
-function getMultipleRandom(arr, num) {
-  const shuffled = [...arr].sort(() => 0.5 - Math.random());
 
-  return shuffled.slice(0, num);
-}
-
-// PRODUCTS SELECTIONS
-const bestSelling = getMultipleRandom(data, 8)
-const hotPrice = getMultipleRandom(data, 8)
-const exploreProducts = getMultipleRandom(data, 8)
-const topTrends = getMultipleRandom(data, 8)
-const newArrivals = getMultipleRandom(data, 8)
 
 
 function HomePage() {
   // states
+  const [data, setData] = React.useState([])
   const theme = useTheme();
   const screenSM = useMediaQuery(theme.breakpoints.down('sm'))
   const screenMD = useMediaQuery(theme.breakpoints.down('md'))
+
+  // Get random elements from an array.
+  function getMultipleRandom(arr, num) {
+    const shuffled = [...arr].sort(() => 0.5 - Math.random());
+
+    return shuffled.slice(0, num);
+  }
+  
+  React.useEffect(() => {
+
+    async function getProducts() {
+      const response = await axios.get('api/shop/products/')
+      setData(response.data)
+    }
+
+    getProducts()
+  },[])
+
+  // PRODUCT SELECTIONS
+  const bestSelling = getMultipleRandom(data, 8)
+  const hotPrice = getMultipleRandom(data, 8)
+  const exploreProducts = getMultipleRandom(data, 8)
+  const topTrends = getMultipleRandom(data, 8)
+  const newArrivals = getMultipleRandom(data, 8)
+  
 
 
   return (

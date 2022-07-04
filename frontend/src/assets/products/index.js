@@ -30,7 +30,7 @@ import grey_tassel_pillow from './grey_tassel_pillow.png'
 import mesas_auxiliares_redondas from './mesas_auxiliares_redondas.jpg'
 import jameson_delux_stools from './jameson_delux_stools.png'
 import chaise_la_campagne from './chaise_la_campagne.png'
-import kawosky_wood_table from './kawosky_wood_table.jpg'
+import kawosky_wood_table from './kawosky_wood_table.png'
 import federico_cushion_stools from './federico_cushion_stools.png'
 import al_hilal_high_chair from './al_hilal_high_chair.png'
 
