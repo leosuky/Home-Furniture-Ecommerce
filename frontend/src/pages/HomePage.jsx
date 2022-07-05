@@ -158,7 +158,7 @@ function HomePage() {
   React.useEffect(() => {
 
     async function getProducts() {
-      const response = await axios.get('api/shop/products/')
+      const response = await axios.get('/api/shop/products/')
       setData(response.data)
     }
 

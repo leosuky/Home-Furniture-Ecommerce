@@ -49,7 +49,7 @@ function ShopPage() {
 
   React.useEffect(() => {
     async function getProducts() {
-      const response = await axios.get('api/shop/products/')
+      const response = await axios.get('/api/shop/products/')
       // console.log(response.data)
       setData(response.data)
     }

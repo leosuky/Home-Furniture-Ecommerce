@@ -45,6 +45,7 @@ function ProductsView({data}) {
                 shape='rounded'
                 color='secondary'
                 onChange={switchPage}
+                siblingCount={0}
             />
         </Box>
     </Box>
