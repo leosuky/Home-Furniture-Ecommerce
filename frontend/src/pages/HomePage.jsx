@@ -3,7 +3,8 @@ import {
   Box, Typography, Button, IconButton,
   useMediaQuery, ImageList, ImageListItem
 } from '@mui/material';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProductsAsync } from '../appStore/slices/ProductSlice';
 
 import { useTheme } from '@mui/material/styles';
 
@@ -33,6 +34,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 // COMPONENTS
 import ProductSlider from '../components/ProductSlider';
 import { StyledButton, StyledButtonAlt } from '../components/Buttons';
+import { Loading, ErrorMessage } from '../components/Feedback';
 import Partners from '../components/Partners';
 
 // LISTS
@@ -142,8 +144,12 @@ const specialZ = [
 
 
 function HomePage() {
-  // states
-  const [data, setData] = React.useState([])
+  // REACT-REDUX
+  const dispatch = useDispatch()
+  const products = useSelector(state => state.product)
+  const {loading, productList, error} = products
+
+  // OTHER APP STATES
   const theme = useTheme();
   const screenSM = useMediaQuery(theme.breakpoints.down('sm'))
   const screenMD = useMediaQuery(theme.breakpoints.down('md'))
@@ -155,22 +161,18 @@ function HomePage() {
     return shuffled.slice(0, num);
   }
   
+  // GET DATA FROM BACKEND WHEN COMPONENT MOUNTS
   React.useEffect(() => {
+    dispatch(getProductsAsync())
 
-    async function getProducts() {
-      const response = await axios.get('/api/shop/products/')
-      setData(response.data)
-    }
-
-    getProducts()
-  },[])
+  },[dispatch])
 
   // PRODUCT SELECTIONS
-  const bestSelling = getMultipleRandom(data, 8)
-  const hotPrice = getMultipleRandom(data, 8)
-  const exploreProducts = getMultipleRandom(data, 8)
-  const topTrends = getMultipleRandom(data, 8)
-  const newArrivals = getMultipleRandom(data, 8)
+  const bestSelling = getMultipleRandom(productList, 8)
+  const hotPrice = getMultipleRandom(productList, 8)
+  const exploreProducts = getMultipleRandom(productList, 8)
+  const topTrends = getMultipleRandom(productList, 8)
+  const newArrivals = getMultipleRandom(productList, 8)
   
 
 
@@ -262,13 +264,13 @@ function HomePage() {
       <Box margin={{xs:'2rem, 1.2rem', sm:'2rem 4rem'}} bgcolor='#fbf4f3' padding={{xs:'1.5rem 2.3rem', sm:'1.5rem 4rem'}} border='2px solid #DA3E31'>
         <Box display='flex' flexDirection='column' alignItems='center' mt='1.5rem'>
           <Typography fontWeight={700} mb='1rem'>Best Selling</Typography>
-          <ProductSlider products={bestSelling}/>
+          {loading ? <Loading/> : error ? <ErrorMessage error={error}/> : <ProductSlider products={bestSelling}/>}
           <Button variant='text' color='secondary' endIcon={<ChevronRightIcon/>}>View All</Button>
         </Box>
 
         <Box display='flex' flexDirection='column' alignItems='center' mt='2.5rem'>
           <Typography fontWeight={700} mb='1rem'>Hot Price</Typography>
-          <ProductSlider products={hotPrice}/>
+          {loading ? <Loading/> : error ? <ErrorMessage error={error}/> : <ProductSlider products={hotPrice}/>}
           <Button variant='text' color='secondary' endIcon={<ChevronRightIcon/>}>View All</Button>
         </Box>
       </Box>
@@ -283,7 +285,7 @@ function HomePage() {
       {/* EXPLORE PRODUCTS */}
       <Box display='flex' flexDirection='column' alignItems='center' mt='2.5rem'>
         <Typography fontWeight={700} mb='1rem'>Explore Our Products</Typography>
-        <ProductSlider products={exploreProducts}/>
+        {loading ? <Loading/> : error ? <ErrorMessage error={error}/> : <ProductSlider products={exploreProducts}/>}
       </Box>
 
       {/* BANNER 02 */}
@@ -296,7 +298,7 @@ function HomePage() {
       {/* TOP TRENDING PRODUCTS */}
       <Box display='flex' flexDirection='column' alignItems='center' mt='2.5rem'>
         <Typography fontWeight={700} mb='1rem'>Top Trending Products</Typography>
-        <ProductSlider products={topTrends}/>
+        {loading ? <Loading/> : error ? <ErrorMessage error={error}/> : <ProductSlider products={topTrends}/>}
       </Box>
 
       {/* SPECIALS */}
@@ -318,7 +320,7 @@ function HomePage() {
       {/* NEW ARRIVALS */}
       <Box display='flex' flexDirection='column' alignItems='center' mt='2.5rem'>
         <Typography fontWeight={700} mb='1rem'>New Arrivals</Typography>
-        <ProductSlider products={newArrivals}/>
+        {loading ? <Loading/> : error ? <ErrorMessage error={error}/> : <ProductSlider products={newArrivals}/>}
       </Box>
 
       {/* INSTAGRAM */}

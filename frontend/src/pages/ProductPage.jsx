@@ -1,24 +1,24 @@
 import React from 'react'
 import { Box, Button } from '@mui/material';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { Loading, ErrorMessage } from '../components/Feedback';
+import { getProductDetailAsync } from '../appStore/slices/ProductDetailSlice';
 import { useParams} from 'react-router-dom'
 
 import ProductDetailCard from '../components/ProductDetailCard';
-// import { StyledButton } from '../components/Buttons';
 
 function ProductPage() {
-    const [product, setProduct] = React.useState([])
+    const dispatch = useDispatch()
+    const product = useSelector(state => state.productDetail)
+    const {loading, productDetail, error} = product
     const params = useParams()
 
     React.useEffect(() => {
-      async function getProduct() {
-        const response = await axios.get(`http://127.0.0.1:8000/api/shop/products/${params.productId}`)
-        setProduct(response.data)
-        console.log(response)
-      }
-  
-      getProduct()
-    }, [params.productId])
+      dispatch(getProductDetailAsync(params.productId))
+
+    }, [dispatch,params.productId])
+
+    console.log(productDetail)
 
   return (
     <Box >
@@ -27,7 +27,7 @@ function ProductPage() {
       </Box>
       
       <Box display='flex' alignItems='center' justifyContent='center' flexDirection='column'>
-        <ProductDetailCard product={product}/>
+        {loading ? <Loading/> : error ? <ErrorMessage error={error}/> : <ProductDetailCard product={productDetail}/>}
       </Box>
     </Box>
   )

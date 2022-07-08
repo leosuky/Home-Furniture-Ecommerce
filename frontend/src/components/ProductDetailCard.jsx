@@ -24,12 +24,12 @@ function ProductDetailCard({product}) {
         <Box flex={0.35}>
             <CardContent sx={{'&>*':{margin:'1.3rem 2rem'}}}>
                 <Typography color='black' variant='h3' textAlign={{xs:'center', lg:'left'}}>{product.name}</Typography>
-                <Divider/>
+                <Divider sx={{margin:'2rem auto'}}/>
                 <Box display='flex' justifyContent='space-between' alignItems='center' width='80%' flexDirection={{xs:'column', sm:'row'}} margin='.7rem auto'>
                     <Rating value={parseFloat(product.rating)} readOnly precision={0.5}/>
                     <Typography>{product.numReviews} reviews</Typography>
                 </Box>
-                <Divider/>
+                <Divider sx={{margin:'2rem auto'}}/>
                 <Typography variant={{xs:'subtitle2', sm:'body1'}}>
                     DESCRIPTION: {product.description}
                 </Typography>

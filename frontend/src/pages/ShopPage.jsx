@@ -3,12 +3,14 @@ import {
   Box, Checkbox, Divider, IconButton, List, ListItemButton, 
   ListItemIcon, ListItemText, Stack, Typography, useMediaQuery
 } from '@mui/material';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProductsAsync } from '../appStore/slices/ProductSlice';
 
 import { useTheme } from '@mui/material/styles';
 import PriceSlider from '../components/PriceSlider';
 import ProductsView from '../components/ProductsView';
 import { StyledButtonAlt } from '../components/Buttons';
+import { Loading, ErrorMessage } from '../components/Feedback';
 
 // lists
 import { categories, colors, furniture_type } from '../data';
@@ -23,10 +25,13 @@ import CircleIcon from '@mui/icons-material/Circle';
 
 
 function ShopPage() {
-  // states
+  // REACT-REDUX
+  const dispatch = useDispatch()
+  const products = useSelector(state => state.product)
+  const {loading, productList, error} = products
+  // OTHER APP STATES
   const [checked, setChecked] = React.useState([0,0,0,0,0])
   const [category, setCategory] = React.useState([0,0,0,0,0,0])
-  const [data, setData] = React.useState([])
   const theme = useTheme()
   const xyxy = useMediaQuery(theme.breakpoints.down('1100'))
 
@@ -48,14 +53,8 @@ function ShopPage() {
   }
 
   React.useEffect(() => {
-    async function getProducts() {
-      const response = await axios.get('/api/shop/products/')
-      // console.log(response.data)
-      setData(response.data)
-    }
-
-    getProducts()
-  }, [])
+    dispatch(getProductsAsync())
+  }, [dispatch])
   
 
 
@@ -193,7 +192,7 @@ function ShopPage() {
 
         {/* PRODUCTS */}
         <Box color='white' flex={{xs:1, md:.65}}>
-          <ProductsView data={data}/>
+          {loading ? <Loading/> : error ? <ErrorMessage error={error}/> : <ProductsView data={productList}/>}
         </Box>
       </Stack>
 
