@@ -18,8 +18,6 @@ function ProductPage() {
 
     }, [dispatch,params.productId])
 
-    console.log(productDetail)
-
   return (
     <Box >
       <Box padding='1.5rem'>

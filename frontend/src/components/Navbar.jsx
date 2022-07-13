@@ -97,7 +97,10 @@ function Navbar() {
           <AccountCircleOutlined/>
         </IconButton>
 
-        <IconButton sx={iconBtn} aria-label='Cart'>
+        <IconButton 
+          sx={iconBtn} aria-label='Cart'
+          LinkComponent={Link} to='/cart'
+        >
           <ShoppingCartOutlined/>
         </IconButton>
       </Box>

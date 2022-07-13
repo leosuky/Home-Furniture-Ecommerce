@@ -4,6 +4,7 @@ import BlogPage from "./BlogPage";
 import ContactUsPage from "./ContactUsPage";
 import AboutUsPage from "./AboutUsPage";
 import ProductPage from "./ProductPage";
+import CartPage from "./CartPage";
 
 
 export {
@@ -13,4 +14,5 @@ export {
     ContactUsPage,
     AboutUsPage,
     ProductPage,
+    CartPage,
 }

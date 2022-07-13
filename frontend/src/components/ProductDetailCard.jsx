@@ -1,8 +1,33 @@
 import React from 'react'
-import { Box, Card, CardMedia, CardContent, Typography, CardActions, Rating, Button, Divider } from '@mui/material'
+import { 
+    Box, Card, CardMedia, CardContent, 
+    Typography, CardActions, Rating, 
+    Button, Divider, IconButton,
+    Tooltip,
+ } from '@mui/material'
+ import { useDispatch } from 'react-redux';
+ import { addCartItemAsync } from '../appStore/slices/CartSlice';
+
+// ICONS
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 function ProductDetailCard({product}) {
+    const [quantity, setQuantity] = React.useState(0)
+    const dispatch = useDispatch()
+
+    const changeQuantity = (action) => {
+        let value = quantity
+        action === 'increase' ? value++ : value--
+
+        setQuantity(value)
+    }
+
+    const addToCart = () => {
+        dispatch(addCartItemAsync(product._id, quantity))
+    }
+
   return (
     <Card 
         sx={{
@@ -30,7 +55,7 @@ function ProductDetailCard({product}) {
                     <Typography>{product.numReviews} reviews</Typography>
                 </Box>
                 <Divider sx={{margin:'2rem auto'}}/>
-                <Typography variant={{xs:'subtitle2', sm:'body1'}}>
+                <Typography variant='subtitle2'>
                     DESCRIPTION: {product.description}
                 </Typography>
 
@@ -57,14 +82,41 @@ function ProductDetailCard({product}) {
                     <Typography variant='h6' fontWeight='700'>{product.countInStock > 0 ? 'In Stock':'Out of Stock'}</Typography>
                 </Box>
 
+                <Box width='100%' border='1px solid #B6B8B8' display={product.countInStock > 0 ? 'block' : 'none'}></Box>
+
+                {/* QUANTITY */}
+                <Box display={product.countInStock > 0 ? 'flex' : 'none'} justifyContent='space-between' alignItems='center' width='80%'>
+                    <Typography variant='h6'>Quantity:</Typography>
+                    <Box display='flex' borderBottom='1px solid black' alignItems='center'>
+                        <Tooltip 
+                            title={quantity === product.countInStock ? `Only ${product.countInStock} items left in stock` : ''}
+                        >
+                            <IconButton onClick={()=>changeQuantity('decrease')} disabled={quantity < 1 ? true:false}>
+                                <RemoveIcon color='secondary'/>
+                            </IconButton>
+                        </Tooltip>
+
+                        <Box fontSize='1.3rem' margin='auto 1rem'>{quantity}</Box>
+                        
+                        <IconButton 
+                            onClick={()=>changeQuantity('increase')}
+                            disabled={quantity === product.countInStock ? true:false}
+                        >
+                            <AddIcon color='secondary'/>
+                        </IconButton>
+                    </Box>
+                </Box>
+
                 <Box width='100%' border='1px solid #B6B8B8'></Box>
 
+                {/* ADD TO CART */}
                 <CardActions sx={{justifyContent:'center'}}>
                     <Button 
+                        onClick={addToCart}
                         variant='contained' color='secondary' 
                         size='large' sx={{minWidth:'100px'}} 
                         endIcon={<AddShoppingCartIcon/>}
-                        disabled={product.countInStock > 0 ? false : true}
+                        disabled={product.countInStock > 0 && quantity > 0 ? false : true}
                     >
                         ADD TO CART
                     </Button>

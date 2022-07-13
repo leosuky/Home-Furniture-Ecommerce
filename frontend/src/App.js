@@ -7,7 +7,11 @@ import Footer from './components/Footer';
 import './App.css';
 
 // Pages
-import {HomePage, AboutUsPage, BlogPage, ContactUsPage, ShopPage, ProductPage} from './pages'
+import {
+  HomePage, AboutUsPage, BlogPage, 
+  ContactUsPage, ShopPage, ProductPage,
+  CartPage,
+} from './pages'
 
 // for testing shit.... ||||||||||||||||||||||||||||||||
 // import Testing from './Testing';
@@ -24,6 +28,7 @@ function App() {
           <Route path='/blog' element={<BlogPage/>} />
           <Route path='/contactus' element={<ContactUsPage/>} />
           <Route path='/aboutus' element={<AboutUsPage/>} />
+          <Route path='/cart' element={<CartPage/>} />
         </Routes>
         <Footer/>
       </ThemeProvider>
