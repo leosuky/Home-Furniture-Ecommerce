@@ -19,7 +19,7 @@ const icons = [
   {id:5, icon:<RiYoutubeFill fill='white'/>},
 ]
 
-const StyledTextField = styled(TextField)(({theme}) => ({
+export const StyledTextField = styled(TextField)(({theme}) => ({
   '& fieldset': {
     borderRadius:'25px'
   }

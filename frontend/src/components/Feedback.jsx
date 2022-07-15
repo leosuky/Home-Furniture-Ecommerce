@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, CircularProgress } from "@mui/material";
+import { Alert, AlertTitle, CircularProgress, Stack } from "@mui/material";
 
 
 export const Loading = () => (
@@ -9,9 +9,12 @@ export const Loading = () => (
 
 export const ErrorMessage = ({error}) => (
     <>
-    <Alert severity="error">
-        <AlertTitle>Error</AlertTitle>
-        {error}
-    </Alert>
+    <Stack width='100%'>
+        <Alert severity="error" onClose={() => {}} variant='filled'>
+            <AlertTitle>Error</AlertTitle>
+            {error}
+        </Alert>
+    </Stack>
+    
     </>
 )

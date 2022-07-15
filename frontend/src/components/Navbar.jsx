@@ -7,6 +7,8 @@ import { AppBar, Toolbar,
   ListItemIcon, Divider,
 } from '@mui/material'
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import { toggleLoginPage } from '../appStore/slices/UserSlice'
 
 import { useTheme } from '@mui/material/styles';
 import home from '../assets/HOME.png'
@@ -38,6 +40,7 @@ const navOptions = [
 
 function Navbar() {
   // states
+  const dispatch = useDispatch()
   const [tab, setTab] = useState(parseInt(sessionStorage.getItem('tab')) || 0);
   const [openDrawer, setOpenDrawer] = useState(false)
   const theme = useTheme();
@@ -93,7 +96,10 @@ function Navbar() {
           <FavoriteBorderOutlined/>
         </IconButton>
 
-        <IconButton sx={iconBtn} aria-label='User'>
+        <IconButton 
+          sx={iconBtn} aria-label='User'
+          onClick={() => dispatch(toggleLoginPage())}
+        >
           <AccountCircleOutlined/>
         </IconButton>
 

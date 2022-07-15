@@ -11,6 +11,7 @@ import {
   HomePage, AboutUsPage, BlogPage, 
   ContactUsPage, ShopPage, ProductPage,
   CartPage,
+  LoginPage,
 } from './pages'
 
 // for testing shit.... ||||||||||||||||||||||||||||||||
@@ -21,6 +22,7 @@ function App() {
     <div className="App">
       <ThemeProvider theme={GlobalTheme}>
         <Navbar/>
+        <LoginPage/>
         <Routes>
           <Route path='/' element={<HomePage/>} />
           <Route path='/shop' element={<ShopPage/>} />
