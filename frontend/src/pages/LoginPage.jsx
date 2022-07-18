@@ -6,14 +6,14 @@ import {
 import styled from '@emotion/styled'
 import { useTheme } from '@mui/material/styles';
 import { useSelector, useDispatch } from 'react-redux'
-import { toggleLoginPage, getUserAsync } from '../appStore/slices/UserSlice'
+import { toggleLoginPage, getUserAsync, registerUserAsync } from '../appStore/slices/UserSlice'
+import { toggleFeedback } from '../appStore/slices/FeedbackSlice';
 import { StyledTextField } from './ContactUsPage'
-import { Loading, ErrorMessage } from '../components/Feedback';
+import { Loading, ErrorPopUp } from '../components/Feedback';
 
 // ICONS
 import CloseIcon from '@mui/icons-material/Close';
 import {FcGoogle} from 'react-icons/fc'
-
 // IMAGES
 import login101 from '../assets/login101.png'
 import home from '../assets/HOME.png'
@@ -25,6 +25,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const AbsoluteBox = styled(Box)(({theme}) => ({
+    zIndex:'5000',
     position:'absolute',
     top:'50%',
     left:'50%',
@@ -48,6 +49,7 @@ function LoginPage() {
     const [name, setName] = React.useState('')
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
+    const [confirmpassword, setConfirmPassword] = React.useState('')
 
     // INPUT HANDLERS
     const handleName = (event) => {
@@ -59,13 +61,29 @@ function LoginPage() {
     const handlePassword = (event) => {
         setPassword(event.target.value)
     }
+    const handleConfirmPassword = (event) => {
+        setConfirmPassword(event.target.value)
+    }
 
     // -- CREATE USEEFFECT TO CLOSE DIALOG WHEN USER IS DETECTED
+    React.useEffect(() => {
+        if (userInfo) {
+            dispatch(toggleLoginPage())
+        } else if(error) {
+            dispatch(toggleFeedback())
+        }
+    }, [userInfo, dispatch, error])
 
     // SUBMIT HANDLERS
     const loginHandler = () => {
         dispatch(getUserAsync(email, password))
     }
+
+    const registerHandler = () => {
+        dispatch(registerUserAsync(name, email, password, confirmpassword))
+    }
+
+    const disabledB = !name || !email || !password || !confirmpassword ? true : false
 
     
   return (
@@ -85,7 +103,7 @@ function LoginPage() {
                 <CloseIcon color='secondary'/>
             </IconButton>
 
-            {error && <AbsoluteBox><ErrorMessage error={error}/></AbsoluteBox>}
+            {error && <AbsoluteBox><ErrorPopUp message={error}/></AbsoluteBox>}
             {loading && <AbsoluteBox><Loading/></AbsoluteBox>}
 
             {/* IMAGE */}
@@ -126,7 +144,7 @@ function LoginPage() {
                         <Box>
                             <StyledTextField 
                                 variant='outlined' placeholder='secret_stuff_123$' 
-                                label='Password' color='secondary'
+                                label='Password' color='secondary' type='password'
                                 onChange={handlePassword} fullWidth 
                             />
                         </Box>
@@ -207,14 +225,23 @@ function LoginPage() {
                         <Box>
                             <StyledTextField 
                                 variant='outlined' placeholder='secret_stuff_123$' 
-                                label='Password' color='secondary'
+                                label='Password' color='secondary' type='password'
                                 onChange={handlePassword} fullWidth
+                            />
+                        </Box>
+                        <Box>
+                            <StyledTextField 
+                                variant='outlined' placeholder='secret_stuff_123$' 
+                                label='Confirm Password' color='secondary' type='password'
+                                onChange={handleConfirmPassword} fullWidth
                             />
                         </Box>
 
                         <Button 
                             variant='contained' size={screenMD ? 'small' : 'large'}
-                            color='secondary' sx={{textTransform:'none', borderRadius:'25px', mt:'1rem'}} 
+                            color='secondary' disabled={disabledB}
+                            sx={{textTransform:'none', borderRadius:'25px', mt:'1rem'}}
+                            onClick={registerHandler}
                         >
                             Create Account
                         </Button>

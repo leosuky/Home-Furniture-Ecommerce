@@ -4,9 +4,12 @@ import {
     Typography, CardActions, Rating, 
     Button, Divider, IconButton,
     Tooltip,
- } from '@mui/material'
- import { useDispatch } from 'react-redux';
- import { addCartItemAsync } from '../appStore/slices/CartSlice';
+} from '@mui/material'
+import { SuccessPopUp } from './Feedback';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { addCartItemAsync } from '../appStore/slices/CartSlice';
+import { toggleFeedback } from '../appStore/slices/FeedbackSlice';
 
 // ICONS
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -16,6 +19,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 function ProductDetailCard({product}) {
     const [quantity, setQuantity] = React.useState(0)
     const dispatch = useDispatch()
+    const {open} = useSelector(state => state.feedback)
 
     const changeQuantity = (action) => {
         let value = quantity
@@ -26,9 +30,13 @@ function ProductDetailCard({product}) {
 
     const addToCart = () => {
         dispatch(addCartItemAsync(product._id, quantity))
+
+        dispatch(toggleFeedback())
     }
 
   return (
+    <>
+    {open && <SuccessPopUp message='Your Item has been added to cart successfully'/>}
     <Card 
         sx={{
             display:'flex', width:{xs:'80vw',lg:'90vw'}, alignItems:'center', 
@@ -125,6 +133,7 @@ function ProductDetailCard({product}) {
         </Box>
         
     </Card>
+    </>
   )
 }
 

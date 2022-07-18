@@ -1,21 +1,21 @@
 import React, {useState, useEffect} from 'react'
 import { AppBar, Toolbar, 
-  Tabs, Tab, 
-  Box, IconButton, 
+  Tabs, Tab, Tooltip, Menu, MenuItem,
+  Box, IconButton, Avatar,
   useMediaQuery, SwipeableDrawer,
   List, ListItemButton, ListItemText,
-  ListItemIcon, Divider,
+  ListItemIcon, Divider, Badge
 } from '@mui/material'
+import styled from '@emotion/styled'
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
-import { toggleLoginPage } from '../appStore/slices/UserSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { toggleLoginPage, logoutUserAsync } from '../appStore/slices/UserSlice'
 
 import { useTheme } from '@mui/material/styles';
 import home from '../assets/HOME.png'
 
 // Icons
-import SearchOutlined from '@mui/icons-material/SearchOutlined';
-import FavoriteBorderOutlined from '@mui/icons-material/FavoriteBorderOutlined';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import AccountCircleOutlined from '@mui/icons-material/AccountCircleOutlined';
 import ShoppingCartOutlined from '@mui/icons-material/ShoppingCartOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -36,12 +36,25 @@ const navOptions = [
   {id:4, path:'/aboutus', label:'ABOUT US', icon: <InfoIcon/>},
 ]
 
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: '0 4px',
+  },
+}));
 
 
 function Navbar() {
   // states
   const dispatch = useDispatch()
+  const {cartItems} = useSelector(state => state.cart)
+  const {userInfo} = useSelector(state => state.user)
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const openUserMenu = Boolean(anchorEl);
   const [tab, setTab] = useState(parseInt(sessionStorage.getItem('tab')) || 0);
+  const [othertabs, setOthertabs] = React.useState(0)
   const [openDrawer, setOpenDrawer] = useState(false)
   const theme = useTheme();
   const screenMD = useMediaQuery(theme.breakpoints.down('1100'))
@@ -67,7 +80,23 @@ function Navbar() {
   const handleTabs = (e, value) => {
     setTab(value)
   }
-  
+
+  const handleAccount = (event) => {
+    if (userInfo) {
+      setAnchorEl(event.currentTarget);
+    }else {
+      setOthertabs(2)
+      dispatch(toggleLoginPage())
+    }
+  }
+
+  const handleAccountClose = () => setAnchorEl(null)
+
+  const handleLogout = () => {
+    dispatch(logoutUserAsync())
+    handleAccountClose()
+  }
+
 
   // Smaller Components____________________________________________________________________
   const tabs = (
@@ -77,8 +106,8 @@ function Navbar() {
         centered
         onChange={handleTabs} 
         sx={{marginLeft: 'auto', marginRight:'auto'}}
-        indicatorColor='secondary'
-        textColor='secondary'
+        indicatorColor={othertabs===0?'secondary':'primary'}
+        textColor={othertabs===0?'secondary':'inherit'}
       >
         <Tab label="Home" component={Link} to='/'/>
         <Tab label="Shop" component={Link} to='/shop'/>
@@ -88,26 +117,36 @@ function Navbar() {
       </Tabs>
 
       <Box sx={{mr:'5%'}}>
-        <IconButton sx={iconBtn} aria-label='search'>
-          <SearchOutlined/>
+  
+        <IconButton 
+          sx={iconBtn} aria-label='favourites'
+          onClick={()=>setOthertabs(1)}
+        >
+          <HelpOutlineIcon color={tab === 5? 'secondary' : 'inherit'}/>
         </IconButton>
 
-        <IconButton sx={iconBtn} aria-label='favourites'>
-          <FavoriteBorderOutlined/>
-        </IconButton>
-
+        <Tooltip title={userInfo ? userInfo.name : ''}>
         <IconButton 
           sx={iconBtn} aria-label='User'
-          onClick={() => dispatch(toggleLoginPage())}
+          onClick={handleAccount}
         >
-          <AccountCircleOutlined/>
+          {
+            userInfo ?
+            <Avatar alt={userInfo.name} sx={{bgcolor:theme.palette.secondary.main}} src='/'/>
+            :
+            <AccountCircleOutlined color={tab === 6? 'secondary' : 'inherit'}/>
+          }
         </IconButton>
+        </Tooltip>
 
         <IconButton 
           sx={iconBtn} aria-label='Cart'
+          onClick={()=>setOthertabs(3)}
           LinkComponent={Link} to='/cart'
         >
-          <ShoppingCartOutlined/>
+          <StyledBadge badgeContent={cartItems.length} color='secondary'>
+            <ShoppingCartOutlined color={tab === 7? 'secondary' : 'inherit'}/>
+          </StyledBadge>
         </IconButton>
       </Box>
     </React.Fragment>
@@ -166,10 +205,26 @@ function Navbar() {
     </React.Fragment>
   )
 
+  const userMenu = (
+    <>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={openUserMenu}
+        onClose={handleAccountClose}
+      >
+        <MenuItem onClick={handleAccountClose}>Profile</MenuItem>
+        <MenuItem onClick={handleAccountClose}>My account</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+      </Menu>
+    </>
+  )
+
 
   return (
     <React.Fragment>
         <AppBar position='sticky' sx={{zIndex: theme.zIndex.drawer+1}}>
+            {userMenu}
             <Toolbar disableGutters>
                 <Box 
                   sx={{

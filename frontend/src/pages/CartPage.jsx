@@ -22,7 +22,7 @@ function CartPage() {
   return (
     <Box display='flex' alignItems='center' justifyContent='center' margin='2rem auto'>
         {
-            cartItems ?
+            cartItems.length ?
 
             <Box sx={{'&>*':{margin:'1rem auto'}}}>
                 <Typography variant='h4' fontWeight={700} color='#333333'>Shopping Cart ({cartItems.length})</Typography>

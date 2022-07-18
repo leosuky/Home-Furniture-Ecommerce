@@ -22,6 +22,7 @@ const userSlice = createSlice({
         },
         userLoginRequest: (state) => {
             state.loading = true
+            state.error = false
         },
         userLoginSuccess: (state, action) => {
             state.loading = false
@@ -31,9 +32,23 @@ const userSlice = createSlice({
             state.loading = false
             state.error = action.payload
         },
-        userLogout: (state, action) => {
-            // state.loading = false
-            // state.error = action.payload
+        userRegisterRequest: (state) => {
+            state.loading = true
+            state.error = false
+        },
+        userRegisterSuccess: (state, action) => {
+            state.loading = false
+            state.userInfo = action.payload
+        },
+        userRegisterFail: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        userLogout: (state) => {
+            return {
+                ...state,
+                userInfo: null
+            }
         }
         
     }
@@ -68,6 +83,45 @@ export const getUserAsync = (email, password) => async (dispatch, getState) => {
     }
 }
 
+export const registerUserAsync = (name, email, password, confirmPassword) => async (dispatch, getState) => {
+    dispatch(userRegisterRequest())
+
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) === false) {
+        return dispatch(userRegisterFail('Invalid Email Address'))
+    } else if (password.length < 8) {
+        return dispatch(userRegisterFail('Password must not be less than 8 characters'))
+    } else if (password !== confirmPassword) {
+        return dispatch(userRegisterFail('Passwords do not match'))
+    } else {
+        try {
+            const config = {
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            }
+    
+            const {data} = await axios.post(
+                '/api/users/register/',
+                {'name':name,'email':email, 'password':password},
+                config
+            )
+    
+            dispatch(userRegisterSuccess(data))
+    
+            sessionStorage.setItem('userInfo',JSON.stringify(getState().user.userInfo))
+    
+        } catch (error) {
+            const message = error.response && error.response.data.detail ? error.response.data.detail : error.message
+            dispatch(userRegisterFail(message))
+        }
+    } 
+}
+
+export const logoutUserAsync = () => (dispatch) => {
+    sessionStorage.removeItem('userInfo')
+    dispatch(userLogout())
+}
+
 export const opencloseLoginPageAsync = () => (dispatch) => {
     dispatch(toggleLoginPage())
 }
@@ -75,6 +129,9 @@ export const opencloseLoginPageAsync = () => (dispatch) => {
 
 
 
-export const {userLoginRequest, userLoginSuccess, userLoginFail, userLogout, toggleLoginPage} = userSlice.actions;
+export const {
+    userLoginRequest, userLoginSuccess, userLoginFail, userLogout, 
+    toggleLoginPage, userRegisterFail, userRegisterRequest, userRegisterSuccess
+} = userSlice.actions;
 
 export default userSlice.reducer;
