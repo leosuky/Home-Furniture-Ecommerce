@@ -67,12 +67,12 @@ function LoginPage() {
 
     // -- CREATE USEEFFECT TO CLOSE DIALOG WHEN USER IS DETECTED
     React.useEffect(() => {
-        if (userInfo) {
+        if (userInfo && userLoginPage) {
             dispatch(toggleLoginPage())
-        } else if(error) {
+        } else if(error && userLoginPage) {
             dispatch(toggleFeedback())
         }
-    }, [userInfo, dispatch, error])
+    }, [userInfo, dispatch, error, userLoginPage])
 
     // SUBMIT HANDLERS
     const loginHandler = () => {

@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@mui/material/styles';
 import GlobalTheme from './ui/Theme';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -10,14 +10,16 @@ import './App.css';
 import {
   HomePage, AboutUsPage, BlogPage, 
   ContactUsPage, ShopPage, ProductPage,
-  CartPage,
-  LoginPage,
+  CartPage, LoginPage, ProfilePage,
+  FAQPage,
 } from './pages'
+import { useSelector } from 'react-redux';
 
 // for testing shit.... ||||||||||||||||||||||||||||||||
 // import Testing from './Testing';
 
 function App() {
+  const {userInfo} = useSelector(state => state.user)
   return (
     <div className="App">
       <ThemeProvider theme={GlobalTheme}>
@@ -31,6 +33,8 @@ function App() {
           <Route path='/contactus' element={<ContactUsPage/>} />
           <Route path='/aboutus' element={<AboutUsPage/>} />
           <Route path='/cart' element={<CartPage/>} />
+          <Route path='/faq' element={<FAQPage/>} />
+          <Route path='/profile' element={userInfo ? <ProfilePage/> : <Navigate to='/'/>} />
         </Routes>
         <Footer/>
       </ThemeProvider>

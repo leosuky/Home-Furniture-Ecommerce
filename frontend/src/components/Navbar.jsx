@@ -79,6 +79,7 @@ function Navbar() {
   // Callback Handlers_____________________________________________________________________
   const handleTabs = (e, value) => {
     setTab(value)
+    setOthertabs(0)
   }
 
   const handleAccount = (event) => {
@@ -119,8 +120,9 @@ function Navbar() {
       <Box sx={{mr:'5%'}}>
   
         <IconButton 
-          sx={iconBtn} aria-label='favourites'
+          sx={iconBtn} aria-label='FAQ'
           onClick={()=>setOthertabs(1)}
+          LinkComponent={Link} to='/faq'
         >
           <HelpOutlineIcon color={tab === 5? 'secondary' : 'inherit'}/>
         </IconButton>
@@ -213,8 +215,9 @@ function Navbar() {
         open={openUserMenu}
         onClose={handleAccountClose}
       >
-        <MenuItem onClick={handleAccountClose}>Profile</MenuItem>
-        <MenuItem onClick={handleAccountClose}>My account</MenuItem>
+        <MenuItem onClick={handleAccountClose}>
+          <Link to='/profile' style={{textDecoration:'inherit',color:'inherit'}}>Profile</Link>
+        </MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </>
