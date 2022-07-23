@@ -19,7 +19,6 @@ function ProductsView({data}) {
 
     const switchPage = (event, value) => {
         const start = (value-1) * pageCount
-        console.log(pageCount)
         const newProducts = data.slice(start, (pageCount+start))
         setProducts(newProducts)
     }

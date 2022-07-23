@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { Box, Stack, Typography, Divider, Button } from '@mui/material'
 
@@ -8,15 +9,11 @@ import CartItemNull from '../components/CartItemNull'
 
 function CartPage() {
     const cart = useSelector(state => state.cart)
-    const {cartItems, totalPrice} = cart
+    const {cartItems, totalPrice, shippingPrice} = cart
+    const {userInfo} = useSelector(state => state.user)
 
     // COMMA SEPERATED NUMBERS
     const price = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-    // CHECKOUT HANDLER
-    const checkoutHandler = () => {
-        console.log('redirect to shipping')
-    }
 
 
   return (
@@ -45,7 +42,7 @@ function CartPage() {
                             <Typography color='black' variant='h5' fontWeight={700}>Summary</Typography>
                             <Box display='flex' justifyContent='space-between' alignItems='center'>
                                 <Typography color='black' variant='subtitle2' >Shipping</Typography>
-                                <Typography color='black' variant='subtitle2' fontWeight={700}>Free</Typography>
+                                <Typography color='black' variant='subtitle2' fontWeight={700}>${shippingPrice}</Typography>
                             </Box>
                             <Box display='flex' justifyContent='space-between' alignItems='center'>
                                 <Typography color='black' variant='subtitle2' >Total</Typography>
@@ -54,13 +51,17 @@ function CartPage() {
                             <Divider/>
                             <Box width='fit-content'>
                                 <Button 
-                                    variant='contained' onClick={checkoutHandler} 
+                                    variant='contained'
                                     sx={{color:'white', bgcolor:'black'}}
+                                    disabled={!userInfo}
+                                    LinkComponent={Link} to='/shipping'
 
                                 >PROCEED TO CHECKOUT</Button>
                             </Box>
+                            <Box width='fit-content' display={userInfo ? 'none':'block'}>
+                                <Typography color='red' variant='subtitle2' >You must be signed in to proceed to checkout</Typography>
+                            </Box> 
                         </Box>
-                        
                     </Box>
                 </Stack>
             </Box>

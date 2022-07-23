@@ -10,6 +10,7 @@ import styled from '@emotion/styled'
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleLoginPage, logoutUserAsync } from '../appStore/slices/UserSlice'
+import { clearCartItems, clearShippingDetails } from '../appStore/slices/CartSlice';
 
 import { useTheme } from '@mui/material/styles';
 import home from '../assets/HOME.png'
@@ -95,6 +96,8 @@ function Navbar() {
 
   const handleLogout = () => {
     dispatch(logoutUserAsync())
+    dispatch(clearCartItems())
+    dispatch(clearShippingDetails())
     handleAccountClose()
   }
 
@@ -124,7 +127,7 @@ function Navbar() {
           onClick={()=>setOthertabs(1)}
           LinkComponent={Link} to='/faq'
         >
-          <HelpOutlineIcon color={tab === 5? 'secondary' : 'inherit'}/>
+          <HelpOutlineIcon color={othertabs === 1? 'secondary' : 'inherit'}/>
         </IconButton>
 
         <Tooltip title={userInfo ? userInfo.name : ''}>
@@ -136,7 +139,7 @@ function Navbar() {
             userInfo ?
             <Avatar alt={userInfo.name} sx={{bgcolor:theme.palette.secondary.main}} src='/'/>
             :
-            <AccountCircleOutlined color={tab === 6? 'secondary' : 'inherit'}/>
+            <AccountCircleOutlined color={othertabs === 2? 'secondary' : 'inherit'}/>
           }
         </IconButton>
         </Tooltip>
@@ -147,7 +150,7 @@ function Navbar() {
           LinkComponent={Link} to='/cart'
         >
           <StyledBadge badgeContent={cartItems.length} color='secondary'>
-            <ShoppingCartOutlined color={tab === 7? 'secondary' : 'inherit'}/>
+            <ShoppingCartOutlined color={othertabs === 3? 'secondary' : 'inherit'}/>
           </StyledBadge>
         </IconButton>
       </Box>

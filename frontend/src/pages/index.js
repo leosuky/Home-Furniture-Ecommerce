@@ -8,6 +8,10 @@ import CartPage from "./CartPage";
 import LoginPage from "./LoginPage";
 import ProfilePage from "./ProfilePage";
 import FAQPage from "./FAQPage";
+import ShippingPage from "./ShippingPage";
+import PaymentPage from "./PaymentPage";
+import OrderSummary from "./OrderSummary";
+import OrderSuccess from './OrderSuccess'
 
 
 export {
@@ -21,4 +25,8 @@ export {
     LoginPage,
     ProfilePage,
     FAQPage,
+    ShippingPage,
+    PaymentPage,
+    OrderSummary,
+    OrderSuccess,
 }
