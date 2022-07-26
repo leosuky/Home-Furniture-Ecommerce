@@ -7,6 +7,8 @@ import cartReducer from './slices/CartSlice'
 import userReducer from './slices/UserSlice'
 import feedbackReducer from './slices/FeedbackSlice'
 import orderReducer from './slices/OrderSlice'
+import orderDetailReducer from './slices/OrderDetailSlice'
+import paymentReducer from './slices/PaymentSlice'
 
 const store = configureStore({
     reducer: {
@@ -16,6 +18,8 @@ const store = configureStore({
         user: userReducer,
         feedback: feedbackReducer,
         order: orderReducer,
+        orderDetail: orderDetailReducer,
+        payment: paymentReducer
     }
 })
 

@@ -12,7 +12,7 @@ import {
   ContactUsPage, ShopPage, ProductPage,
   CartPage, LoginPage, ProfilePage,
   FAQPage, ShippingPage, PaymentPage,
-  OrderSummary, OrderSuccess
+  OrderSummary, OrderDetailPage
 } from './pages'
 import { useSelector } from 'react-redux';
 
@@ -39,7 +39,7 @@ function App() {
           <Route path='/shipping' element={<ShippingPage/>} />
           <Route path='/payment' element={<PaymentPage/>} />
           <Route path='/order_summary' element={<OrderSummary/>} />
-          <Route path='/order_success' element={<OrderSuccess/>} />
+          <Route path='/order-detail/:orderId' element={<OrderDetailPage/>} />
         </Routes>
         <Footer/>
       </ThemeProvider>

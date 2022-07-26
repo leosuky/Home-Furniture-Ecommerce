@@ -37,4 +37,49 @@ function Testing() {
   )
 }
 
+// import React from 'react';
+// import {loadStripe} from '@stripe/stripe-js';
+// import {
+//   CardElement,
+//   Elements,
+//   useStripe,
+//   useElements,
+// } from '@stripe/react-stripe-js';
+
+// const CheckoutForm = () => {
+//   const stripe = useStripe();
+//   const elements = useElements();
+
+//   const handleSubmit = async (event) => {
+//     event.preventDefault();
+
+//     if (elements == null) {
+//       return;
+//     }
+
+//     const {error, paymentMethod} = await stripe.createPaymentMethod({
+//       type: 'card',
+//       card: elements.getElement(CardElement),
+//     });
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <CardElement />
+//       <button type="submit" disabled={!stripe || !elements}>
+//         Pay
+//       </button>
+//     </form>
+//   );
+// };
+
+// const stripePromise = loadStripe('pk_test_51IzQ7hCVo6jJs87fAq6aFGQh2LdSXf3POf2bnuEiEy3tdypI9p5avmOFET2bGoDnGa9aeFrVObPah0QqMBgTYzbq00NksZ6RXw');
+
+// const Testing = () => (
+//   <Elements stripe={stripePromise}>
+//     <CheckoutForm />
+//   </Elements>
+// );
+
+
 export default Testing

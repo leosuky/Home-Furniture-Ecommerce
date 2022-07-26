@@ -11,7 +11,7 @@ import FAQPage from "./FAQPage";
 import ShippingPage from "./ShippingPage";
 import PaymentPage from "./PaymentPage";
 import OrderSummary from "./OrderSummary";
-import OrderSuccess from './OrderSuccess'
+import OrderDetailPage from './OrderDetailPage'
 
 
 export {
@@ -28,5 +28,5 @@ export {
     ShippingPage,
     PaymentPage,
     OrderSummary,
-    OrderSuccess,
+    OrderDetailPage,
 }

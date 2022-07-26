@@ -48,7 +48,7 @@ const OrderItemCard = ({name, image, quantity, price}) => (
 function OrderSummary() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const {success, error } = useSelector(state => state.order)
+    const {success, error, order } = useSelector(state => state.order)
     const {
         totalPrice, shippingPrice, tax,
         shippingInfo, paymentMethod,
@@ -76,13 +76,13 @@ function OrderSummary() {
         if (success) {
             console.log('it got here')
             setTimeout(() => {
-                navigate('/order_success')
+                navigate(`/order-detail/${order._id}`)
             }, 500);
             
         } else if (error) {
             dispatch(toggleFeedback())
         }
-    }, [success, navigate, dispatch, error])
+    }, [success, navigate, dispatch, error, order._id])
 
   return (
     <Box display='flex' alignItems='center' justifyContent='center' margin='2rem auto'>

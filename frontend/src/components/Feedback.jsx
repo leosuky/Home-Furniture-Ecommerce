@@ -22,6 +22,30 @@ export const ErrorMessage = ({error}) => (
     </>
 )
 
+export const SuccessMessage = ({message}) => (
+    <>
+    <Stack width='100%'>
+        <Alert severity="success">
+            {message}
+        </Alert>
+    </Stack>
+    
+    </>
+)
+
+export const WarningMessage = ({message}) => (
+    <>
+    <Stack width='100%'>
+        <Alert severity="warning">
+            {message}
+        </Alert>
+    </Stack>
+    
+    </>
+)
+
+// -----------------------------------------------------------------------
+
 export const ErrorPopUp = ({message}) => {
     const {open} = useSelector(state => state.feedback)
     const dispatch = useDispatch()
