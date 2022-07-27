@@ -1,11 +1,12 @@
 import React from 'react'
-import { Box, Stack, Typography, Divider, Button, Card, CardMedia, CardContent } from '@mui/material'
+import { Box, Stack, Typography, Divider, Card, CardMedia, CardContent } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearCartItems, } from '../appStore/slices/CartSlice'
 import { createOrderReset } from '../appStore/slices/OrderSlice'
 import { getOrderDetailsAsync } from '../appStore/slices/OrderDetailSlice'
 import { Loading, ErrorMessage, SuccessMessage, WarningMessage } from '../components/Feedback'
 import { useParams } from 'react-router-dom'
+import StripePayments from '../components/StripePayments'
 
 
 
@@ -51,8 +52,6 @@ function OrderDetailPage() {
   const params = useParams()
   const {order, error, loading } = useSelector(state => state.orderDetail)
 
-  //pk_test_51IzQ7hCVo6jJs87fAq6aFGQh2LdSXf3POf2bnuEiEy3tdypI9p5avmOFET2bGoDnGa9aeFrVObPah0QqMBgTYzbq00NksZ6RXw
-  // sk_test_51IzQ7hCVo6jJs87f2Kdn1kj8CVRdUyPqQI1DTdApCktyDJo0OjUp3mDQJjDaQ4mU3NcqzKgsCI3L6LOWZ6C1WdLa00npqN68l4
 
   React.useEffect(() => {
     if (!order || order._id !== Number(params.orderId)) {
@@ -86,7 +85,9 @@ function OrderDetailPage() {
                 <Box mt='.5rem'>
                   {
                     order.isDelivered ? 
-                    <SuccessMessage message={`Delivered on ${order.deliveredAt}`}/> :
+                    <SuccessMessage 
+                      message={`Delivered on ${new Date(order.deliveredAt.split('.')[0])}`}
+                    /> :
                     <WarningMessage message='Not Delivered'/>
                   }
                 </Box>
@@ -100,7 +101,9 @@ function OrderDetailPage() {
                 <Box mt='.5rem'>
                   {
                     order.isPaid ? 
-                    <SuccessMessage message={`Paid on ${order.paidAt}`}/> :
+                    <SuccessMessage 
+                      message={`Paid on ${new Date(order.paidAt.split('.')[0])}`}
+                    /> :
                     <WarningMessage message='Not Paid'/>
                   }
                 </Box>
@@ -148,11 +151,14 @@ function OrderDetailPage() {
                   <Typography color='green' variant='body1' fontWeight={700}>${order.totalPrice}</Typography>
               </Box>
               <Divider/>
-              <Box width='fit-content'>
-                  <Button 
-                      variant='contained' size='large'
-                      sx={{color:'white', bgcolor:'black', width:'200px'}}
-                  >PLACE ORDER</Button>
+              <Box width='100%' display={order.isPaid ? 'none' : 'flex'} flexDirection='column' alignItems='center'>
+                  <StripePayments price={Number(order.totalPrice)} id={params.orderId}/>
+                  <Typography color='darkblue' variant='subtitle2' mt='1rem'>
+                    Test Card: 4242 4242 4242 4242 4242
+                  </Typography>
+                  <Typography color='darkblue' variant='subtitle2'>
+                    Expiry: 'Any future date'  CVV: 123
+                  </Typography>
               </Box>
           </Box>
         </Box>

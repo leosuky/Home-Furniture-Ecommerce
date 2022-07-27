@@ -82,7 +82,7 @@ function OrderSummary() {
         } else if (error) {
             dispatch(toggleFeedback())
         }
-    }, [success, navigate, dispatch, error, order._id])
+    }, [success, navigate, dispatch, error])
 
   return (
     <Box display='flex' alignItems='center' justifyContent='center' margin='2rem auto'>

@@ -9,7 +9,7 @@ import {
  import { savePaymentMethod } from '../appStore/slices/CartSlice'
 
 // ICONS
-import {BsPaypal} from 'react-icons/bs'
+import CreditCardIcon from '@mui/icons-material/CreditCard';
 import {FaTruck} from 'react-icons/fa'
 
 function PaymentPage() {
@@ -38,8 +38,8 @@ function PaymentPage() {
                     value={paymentMethod} onChange={handleChange}
                 >
                     <Box display='flex' alignItems='center'>
-                        <FormControlLabel value="PayPal" control={<Radio color='secondary'/>} label="PayPal" />
-                        <BsPaypal/>
+                        <FormControlLabel value="Credit Card" control={<Radio color='secondary'/>} label="Credit Card" />
+                        <CreditCardIcon/>
                     </Box>
 
                     <Box display='flex' alignItems='center'>
