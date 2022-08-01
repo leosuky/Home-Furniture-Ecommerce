@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleLoginPage, logoutUserAsync } from '../appStore/slices/UserSlice'
 import { clearCartItems, clearShippingDetails } from '../appStore/slices/CartSlice';
+import { myOrdersReset } from '../appStore/slices/MyOrderSlice';
 
 import { useTheme } from '@mui/material/styles';
 import home from '../assets/HOME.png'
@@ -98,6 +99,7 @@ function Navbar() {
     dispatch(logoutUserAsync())
     dispatch(clearCartItems())
     dispatch(clearShippingDetails())
+    dispatch(myOrdersReset())
     handleAccountClose()
   }
 

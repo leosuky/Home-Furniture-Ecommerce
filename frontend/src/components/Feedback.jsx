@@ -44,6 +44,17 @@ export const WarningMessage = ({message}) => (
     </>
 )
 
+export const InfoMessage = ({message}) => (
+    <>
+    <Stack width='100%'>
+        <Alert severity="info">
+            {message}
+        </Alert>
+    </Stack>
+    
+    </>
+)
+
 // -----------------------------------------------------------------------
 
 export const ErrorPopUp = ({message}) => {
