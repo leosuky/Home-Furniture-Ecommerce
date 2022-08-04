@@ -10,6 +10,7 @@ import orderReducer from './slices/OrderSlice'
 import orderDetailReducer from './slices/OrderDetailSlice'
 import paymentReducer from './slices/PaymentSlice'
 import myOrderReducer from './slices/MyOrderSlice'
+import reviewReducer from './slices/ReviewSlice'
 
 
 const store = configureStore({
@@ -23,6 +24,7 @@ const store = configureStore({
         orderDetail: orderDetailReducer,
         payment: paymentReducer,
         myOrders: myOrderReducer,
+        review: reviewReducer,
     }
 })
 

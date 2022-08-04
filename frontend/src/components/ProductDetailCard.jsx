@@ -20,6 +20,7 @@ function ProductDetailCard({product}) {
     const [quantity, setQuantity] = React.useState(0)
     const dispatch = useDispatch()
     const {open} = useSelector(state => state.feedback)
+    const {error} = useSelector(state => state.review)
 
     const changeQuantity = (action) => {
         let value = quantity
@@ -36,7 +37,7 @@ function ProductDetailCard({product}) {
 
   return (
     <>
-    {open && <SuccessPopUp message='Your Item has been added to cart successfully'/>}
+    {open && !error && <SuccessPopUp message='Your Item has been added to cart successfully'/>}
     <Card 
         sx={{
             display:'flex', width:{xs:'80vw',lg:'90vw'}, alignItems:'center', 
